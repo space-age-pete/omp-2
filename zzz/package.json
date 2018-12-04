@@ -1,5 +1,5 @@
 {
-  "name": "omp-2",
+  "name": "skeleton_react",
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
@@ -7,20 +7,21 @@
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
-    "seed": "node scripts/seedDB.js",
     "install": "cd client && yarn install;",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
-  "repository": "https://github.com/space-age-pete/omp-2.git",
-  "author": "s-a-p <josh.furlin@gmail.com>",
-  "license": "MIT",
-  "dependencies": {
-    "express": "^4.16.4",
-    "if-env": "^1.0.4",
-    "mongoose": "^5.3.14"
-  },
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "concurrently": "^4.1.0"
+    "concurrently": "^3.5.0",
+    "nodemon": "^1.11.0"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "body-parser": "^1.17.2",
+    "express": "^4.15.4",
+    "if-env": "^1.0.4",
+    "mongoose": "^5.0.17"
   }
 }

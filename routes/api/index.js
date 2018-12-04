@@ -1,6 +1,6 @@
-const router = require("express").Router();
-const exampleRoutes = require("./examples");
+const router = require("express").Router()
+const exampleRoutes = require("./mics")
 
-router.use("/examples", exampleRoutes);
+router.use("/mics", exampleRoutes)
 
-module.exports = router;
+module.exports = router
