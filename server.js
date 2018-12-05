@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use(routes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/openmicslist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/openmiclist");
 
 app.listen(PORT, function() {
   console.log(`API Server now listening on PORT ${PORT}!`);
