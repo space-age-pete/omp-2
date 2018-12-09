@@ -4,7 +4,7 @@ import API from "../../utils/API";
 
 class Home extends Component {
   state = {
-    mics: [{ micName: "pretend" }]
+    mics: []
   };
 
   componentDidMount() {
@@ -12,14 +12,14 @@ class Home extends Component {
   }
 
   componentDidUpdate() {
-    console.log(this.state.mics);
+    console.log("update: ", this.state.mics);
   }
 
   loadMics = () => {
     API.getMics()
       .then(res => {
         console.log(res.data);
-        //this.setState({ mics: res.data })
+        this.setState({ mics: res.data });
       })
       .catch(err => console.log(err));
 
@@ -31,10 +31,20 @@ class Home extends Component {
       <div>
         <h1> Welcome to OMP </h1>
         <h3> whatever </h3>
-        {this.state.mics[0].micName}
+        {this.state.mics.length ? (
+          <div>
+            {this.state.mics.map(mic => (
+              <h5>{mic.micName}</h5>
+            ))}
+          </div>
+        ) : (
+          <h5>nothin' doin'</h5>
+        )}
       </div>
     );
   }
 }
 
 export default Home;
+
+//<h5>{this.state.mics[0].micName}</h5>
