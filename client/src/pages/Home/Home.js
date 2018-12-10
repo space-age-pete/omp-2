@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./Home.css";
 import API from "../../utils/API";
 
@@ -34,7 +35,9 @@ class Home extends Component {
         {this.state.mics.length ? (
           <div>
             {this.state.mics.map(mic => (
-              <h5>{mic.micName}</h5>
+              <h5 key={mic._id}>
+                <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
+              </h5>
             ))}
           </div>
         ) : (

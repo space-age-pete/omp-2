@@ -3,7 +3,7 @@ const db = require("../models");
 // Defining methods for the micsController
 module.exports = {
   findAll: function(req, res) {
-    //console.log("!!!!!!!!!find hit");
+    console.log("!!!!!!!!!find hit");
     db.Mic.find({})
       .then(dbModel => {
         console.log(dbModel);
