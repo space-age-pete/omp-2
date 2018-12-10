@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 
-class Detail extends Component {
+class AddMic extends Component {
   state = {
     mic: {}
   };
@@ -33,4 +33,4 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+export default AddMic;
