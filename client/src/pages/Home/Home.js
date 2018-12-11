@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
 import API from "../../utils/API";
+import { Container, Row, Col } from "reactstrap";
 
 class Home extends Component {
   state = {
@@ -29,21 +30,29 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
-        <h1> Welcome to OMP </h1>
-        <h3> whatever </h3>
-        {this.state.mics.length ? (
-          <div>
-            {this.state.mics.map(mic => (
-              <h5 key={mic._id}>
-                <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
-              </h5>
-            ))}
-          </div>
-        ) : (
-          <h5>nothin' doin'</h5>
-        )}
-      </div>
+      <Container>
+        <Row>
+          <h1 id="title"> Welcome to OMP </h1>
+        </Row>
+        <Row>
+          <Col id="maincol" xs="8">
+            {this.state.mics.length ? (
+              <div>
+                {this.state.mics.map(mic => (
+                  <h5 key={mic._id}>
+                    <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
+                  </h5>
+                ))}
+              </div>
+            ) : (
+              <h5>nothin' doin'</h5>
+            )}
+          </Col>
+          <Col xs="4">
+            <Link to={"/newmic"}>Add a Mic</Link>
+          </Col>
+        </Row>
+      </Container>
     );
   }
 }
