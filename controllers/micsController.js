@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     //console.log("!!!!!!!!!find hit");
-    db.Mic.find({})
+    db.Mic.find(req.query)
       .then(dbModel => {
         console.log(dbModel);
         res.json(dbModel);

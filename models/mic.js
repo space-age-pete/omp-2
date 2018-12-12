@@ -1,5 +1,5 @@
-const mongoose = require("mongoose")
-const Schema = mongoose.Schema
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
 const micSchema = new Schema({
   micName: { type: String, required: true },
@@ -14,8 +14,8 @@ const micSchema = new Schema({
   phone: String,
   additionalInfo: String,
   date: { type: Date, default: Date.now }
-})
+});
 
-const Mic = mongoose.model("Mic", micSchema)
+const Mic = mongoose.model("Mic", micSchema);
 
-module.exports = Mic
+module.exports = Mic;

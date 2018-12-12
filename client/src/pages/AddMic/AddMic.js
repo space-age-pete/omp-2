@@ -19,7 +19,7 @@ export default class AddMic extends Component {
     address: "",
     signUpTime: "",
     startTime: "",
-    day: "Sunday",
+    day: "",
     slotLength: 0,
     host: ""
   };
@@ -34,6 +34,7 @@ export default class AddMic extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
+    //cleaner way to do this with destructuring or w/e?
     if (
       this.state.micName &&
       this.state.locationName &&
@@ -48,8 +49,14 @@ export default class AddMic extends Component {
         address: this.state.address,
         signUpTime: this.state.signUpTime,
         startTime: this.state.startTime,
-        day: this.state.day
-      }).catch(err => console.log(err));
+        day: this.state.day,
+        host: this.state.host,
+        slotLength: this.state.slotLength
+      })
+        .catch(err => console.log(err))
+        .then(() => this.props.history.push(`/mics`));
+
+      //above redirect could be cleaner
     }
   };
 
@@ -111,9 +118,10 @@ export default class AddMic extends Component {
                 value={this.state.day}
                 onChange={this.handleInputChange}
                 type="select"
-                name="select"
+                name="day"
                 id="day"
               >
+                <option />
                 <option>Sunday</option>
                 <option>Monday</option>
                 <option>Tuesday</option>
@@ -177,7 +185,7 @@ export default class AddMic extends Component {
                   type="text"
                   name="host"
                   id="host"
-                  placeholder="password placeholder"
+                  placeholder="host placeholder"
                 />
               </FormGroup>
             </Col>
