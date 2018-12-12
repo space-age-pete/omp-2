@@ -4,9 +4,11 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     //console.log("!!!!!!!!!find hit");
+    console.log("req", req.query);
     db.Mic.find(req.query)
       .then(dbModel => {
-        console.log(dbModel);
+        console.log("dbModel", dbModel);
+
         res.json(dbModel);
       })
       .catch(err => res.status(422).json(err));

@@ -2,8 +2,9 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getMics: function() {
-    return axios.get("/api/mics");
+  getMics: function(query) {
+    console.log("the API query: ", query);
+    return axios.get("/api/mics", query);
   },
   // Gets the book with the given id
   getMic: function(id) {
