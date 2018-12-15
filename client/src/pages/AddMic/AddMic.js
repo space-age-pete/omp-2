@@ -6,6 +6,7 @@ import {
   Button,
   Form,
   FormGroup,
+  FormText,
   Label,
   Input,
   Row,
@@ -21,7 +22,8 @@ export default class AddMic extends Component {
     startTime: "",
     day: "",
     slotLength: 0,
-    host: ""
+    host: "",
+    micImage: null
   };
 
   handleInputChange = event => {
@@ -30,6 +32,11 @@ export default class AddMic extends Component {
       [name]: value
     });
     console.log(this.state.day);
+  };
+
+  fileSelectedHandler = event => {
+    //console.log("file", event.target.files[0]);
+    this.setState({ micImage: event.target.files[0] });
   };
 
   handleFormSubmit = event => {
@@ -196,6 +203,23 @@ export default class AddMic extends Component {
             </Label>
             <Col sm={10}>
               <Input type="textarea" name="text" id="exampleText" />
+            </Col>
+          </FormGroup>
+          <FormGroup row>
+            <Label for="micImage" sm={2}>
+              File
+            </Label>
+            <Col sm={10}>
+              <Input
+                onChange={this.fileSelectedHandler}
+                type="file"
+                name="micImage"
+                id="micImage"
+              />
+              <FormText color="muted">
+                This is some placeholder block-level help text for the above
+                input. It's a bit lighter and easily wraps to a new line.
+              </FormText>
             </Col>
           </FormGroup>
           <FormGroup check row>

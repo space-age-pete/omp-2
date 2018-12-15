@@ -4,10 +4,10 @@ const db = require("../models");
 module.exports = {
   findAll: function(req, res) {
     //console.log("!!!!!!!!!find hit");
-    console.log("req", req.query);
+    //console.log("req", req.query);
     db.Mic.find(req.query)
       .then(dbModel => {
-        console.log("dbModel", dbModel);
+        //console.log("dbModel", dbModel);
 
         res.json(dbModel);
       })
@@ -19,7 +19,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    db.Mic.create(req.body)
+    console.log(req.file);
+    db.Mic.create({ ...req.body, img: req.file.path })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },

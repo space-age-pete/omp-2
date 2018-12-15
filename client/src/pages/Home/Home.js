@@ -24,7 +24,8 @@ class Home extends Component {
   }
 
   componentDidUpdate() {
-    console.log("update: ", this.state.mics);
+    //this.loadMics();
+    //console.log("update: ", this.state.mics);
   }
 
   handleInputChange = event => {

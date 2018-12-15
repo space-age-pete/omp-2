@@ -17,6 +17,20 @@ class Detail extends Component {
       .catch(err => console.log(err));
   }
 
+  fileSelectedHandler = event => {
+    console.log(event.target.files[0]);
+  };
+
+  imageTester = um => {
+    if (this.state.mic.img)
+      return (
+        <img
+          src={"/" + this.state.mic.img}
+          alt={"localhost:3001/" + this.state.mic.img}
+        />
+      );
+  };
+
   render() {
     return (
       <div>
@@ -28,6 +42,9 @@ class Detail extends Component {
             {key}: {this.state.mic[key]}
           </h5>
         ))}
+        <hr />
+        <input type="file" onChange={this.fileSelectedHandler} />
+        {this.imageTester()}
       </div>
     );
   }
