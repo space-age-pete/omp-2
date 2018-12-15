@@ -35,7 +35,7 @@ export default class AddMic extends Component {
   };
 
   fileSelectedHandler = event => {
-    //console.log("file", event.target.files[0]);
+    console.log("file", event.target.files);
     this.setState({ micImage: event.target.files[0] });
   };
 
@@ -50,16 +50,27 @@ export default class AddMic extends Component {
       this.state.startTime &&
       this.state.day
     ) {
-      API.saveMic({
-        micName: this.state.micName,
-        locationName: this.state.locationName,
-        address: this.state.address,
-        signUpTime: this.state.signUpTime,
-        startTime: this.state.startTime,
-        day: this.state.day,
-        host: this.state.host,
-        slotLength: this.state.slotLength
-      })
+      const fd = new FormData();
+      fd.append("micName", this.state.micName);
+      fd.append("locationName", this.state.locationName);
+      fd.append("address", this.state.address);
+      fd.append("signUpTime", this.state.signUpTime);
+      fd.append("startTime", this.state.startTime);
+      fd.append("day", this.state.day);
+      fd.append("micImage", this.state.micImage, this.state.micImage.name);
+
+      // API.saveMic({
+      //   micName: this.state.micName,
+      //   locationName: this.state.locationName,
+      //   address: this.state.address,
+      //   signUpTime: this.state.signUpTime,
+      //   startTime: this.state.startTime,
+      //   day: this.state.day,
+      //   host: this.state.host,
+      //   slotLength: this.state.slotLength,
+      //   micImage: this.state.micImage
+      // })
+      API.saveMic(fd)
         .catch(err => console.log(err))
         .then(() => this.props.history.push(`/mics`));
 
@@ -241,6 +252,7 @@ export default class AddMic extends Component {
               </Button>
             </Col>
           </FormGroup>
+          <Button onClick={() => console.log(this.state)} />
         </Form>
       </Container>
     );

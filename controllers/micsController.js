@@ -20,7 +20,8 @@ module.exports = {
   },
   create: function(req, res) {
     console.log(req.file);
-    db.Mic.create({ ...req.body, img: req.file.path })
+    let x = req.file ? req.file.path : null;
+    db.Mic.create({ ...req.body, img: x })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
