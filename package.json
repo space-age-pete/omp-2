@@ -16,11 +16,14 @@
   "author": "s-a-p <josh.furlin@gmail.com>",
   "license": "MIT",
   "dependencies": {
+    "bcrypt-nodejs": "^0.0.3",
     "bootstrap": "^4.1.3",
     "express": "^4.16.4",
     "if-env": "^1.0.4",
     "mongoose": "^5.3.14",
-    "multer": "^1.4.1"
+    "multer": "^1.4.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0"
