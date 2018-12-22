@@ -30,8 +30,12 @@ router
   .route("/")
   .get(micsController.findAll)
   .post(upload.single("micImage"), micsController.create);
+
 //.post(micsController.create);
 
-router.route("/:id").get(micsController.findById);
+router
+  .route("/:id")
+  .get(micsController.findById)
+  .delete(micsController.remove);
 
 module.exports = router;

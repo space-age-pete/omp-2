@@ -10,10 +10,10 @@ export default {
   getMic: function(id) {
     return axios.get("/api/mics/" + id);
   },
-  //   // Deletes the book with the given id
-  //   deleteMic: function(id) {
-  //     return axios.delete("/api/mics/" + id);
-  //   },
+  // Deletes the book with the given id
+  deleteMic: function(id) {
+    return axios.delete("/api/mics/" + id);
+  },
   // Saves a book to the database
   saveMic: function(micData) {
     return axios.post("/api/mics", micData);
