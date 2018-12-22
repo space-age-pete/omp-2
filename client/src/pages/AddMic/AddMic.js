@@ -57,7 +57,8 @@ export default class AddMic extends Component {
       fd.append("signUpTime", this.state.signUpTime);
       fd.append("startTime", this.state.startTime);
       fd.append("day", this.state.day);
-      fd.append("micImage", this.state.micImage, this.state.micImage.name);
+      if (this.state.micImage)
+        fd.append("micImage", this.state.micImage, this.state.micImage.name);
 
       // API.saveMic({
       //   micName: this.state.micName,

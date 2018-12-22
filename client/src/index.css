@@ -6,9 +6,17 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: white;
+  /* background-image: url("http://www.wallpaperdisco.com/images/pattern-tiles/microphone-wallpaper-disco-tom-wahlin@2x.png");
+  background-size: 15%; */
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* .container {
+  background-color: white;
+  opacity: .95;
+} */

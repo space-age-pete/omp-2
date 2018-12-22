@@ -6,8 +6,7 @@ import "./Detail.css";
 
 class Detail extends Component {
   state = {
-    mic: {},
-    imgcol: 0
+    mic: {}
   };
   // When this component mounts, grab the mic with the _id of this.props.match.params.id
   // e.g. localhost:3000/mics/599dcb67f0f16317844583fc
@@ -22,12 +21,14 @@ class Detail extends Component {
 
   deleteThis = event => {
     event.preventDefault();
-    API.deleteMic(this.props.match.params.id)
-      .then(res => {
-        console.log(res.data);
-        this.props.history.push(`/mics`);
-      })
-      .catch(err => console.log(err));
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      API.deleteMic(this.props.match.params.id)
+        .then(res => {
+          console.log(res.data);
+          this.props.history.push(`/mics`);
+        })
+        .catch(err => console.log(err));
+    }
   };
 
   imageTester = um => {
@@ -36,7 +37,7 @@ class Detail extends Component {
         <img
           src={"/" + this.state.mic.img}
           alt={"localhost:3001/" + this.state.mic.img}
-          class="micDetailIMG"
+          className="micDetailIMG"
         />
       );
   };
@@ -48,6 +49,7 @@ class Detail extends Component {
           <Col sm={this.state.mic.img ? 4 : 0}>{this.imageTester()}</Col>
           <Col sm={this.state.mic.img ? 8 : 12}>
             <h1>{this.state.mic.micName}</h1>
+            <hr />
             <h3>
               {this.state.mic.day}s at {this.state.mic.locationName}
             </h3>

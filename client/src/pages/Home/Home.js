@@ -54,11 +54,13 @@ class Home extends Component {
         <Row>
           <h1 id="title"> Welcome to OMP </h1>
         </Row>
-        <Row>
-          <Form>
-            <FormGroup row>
-              <Label for="day">Day of Week*</Label>
+        <Form row>
+          <FormGroup row>
+            <Label for="day" sm={2}>
+              Day of Week
+            </Label>
 
+            <Col sm={8}>
               <Input
                 value={this.state.day}
                 onChange={this.handleInputChange}
@@ -75,10 +77,12 @@ class Home extends Component {
                 <option>Friday</option>
                 <option>Saturday</option>
               </Input>
-            </FormGroup>
-            <Button onClick={this.loadMics}>Submit</Button>
-          </Form>
-        </Row>
+            </Col>
+            <Col sm="2">
+              <Button onClick={this.loadMics}>Submit</Button>
+            </Col>
+          </FormGroup>
+        </Form>
         <Row>
           <Col id="maincol" xs="8">
             {this.state.mics.length ? (
@@ -94,7 +98,9 @@ class Home extends Component {
             )}
           </Col>
           <Col xs="4">
-            <Link to={"/newmic"}>Add a Mic</Link>
+            <Link to={"/newmic"}>
+              <h5>Add a Mic</h5>
+            </Link>
           </Col>
         </Row>
       </Container>
