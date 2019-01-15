@@ -49,18 +49,18 @@ class Detail extends Component {
           <Col sm={this.state.mic.img ? 4 : 0}>{this.imageTester()}</Col>
           <Col sm={this.state.mic.img ? 8 : 12}>
             <h1>{this.state.mic.micName}</h1>
-            <hr />
+            <br />
             <h3>
               {this.state.mic.day}s at {this.state.mic.locationName}
             </h3>
             <h5>{this.state.mic.address}</h5>
-            <hr />
-            <hr />
+            <br />
+            <br />
             <h4>List at {this.state.mic.signUpTime} PM </h4>
             <h4>Show at {this.state.mic.startTime} PM</h4>
           </Col>
         </Row>
-        <hr />
+        <br />
         <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
       </Container>
     );

@@ -1,3 +1,4 @@
 module.exports = {
-  Mic: require("./mic")
-}
+  Mic: require("./mic"),
+  User: require("./user")
+};

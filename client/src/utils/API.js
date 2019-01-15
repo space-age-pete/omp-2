@@ -1,20 +1,20 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+  // Gets all mics
   getMics: function(query) {
     console.log("the API query: ", query);
     return axios.get("/api/mics", query);
   },
-  // Gets the book with the given id
+  // Gets the mic with the given id
   getMic: function(id) {
     return axios.get("/api/mics/" + id);
   },
-  // Deletes the book with the given id
+  // Deletes the mic with the given id
   deleteMic: function(id) {
     return axios.delete("/api/mics/" + id);
   },
-  // Saves a book to the database
+  // Saves a mic to the database
   saveMic: function(micData) {
     return axios.post("/api/mics", micData);
   }
