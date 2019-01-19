@@ -19,8 +19,9 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function(req, res) {
-    console.log(req.file);
-    let x = req.file ? req.file.path : null;
+    console.log("req.file", req.file);
+    //console.log("req.file.path", req.file.path);
+    let x = req.file ? req.file.path : "uploads/default.jpg";
     db.Mic.create({ ...req.body, img: x })
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
