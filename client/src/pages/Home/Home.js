@@ -21,7 +21,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.loadMics();
+    this.loadMics(this.state.day);
   }
 
   componentDidUpdate() {
@@ -37,8 +37,8 @@ class Home extends Component {
     setTimeout(() => console.log(this.state.day), 300);
   };
 
-  loadMics = () => {
-    let theParams = this.state.day ? { day: this.state.day } : "";
+  loadMics = day => {
+    let theParams = day ? { day: day } : "";
     API.getMics({ params: theParams })
       .then(res => {
         console.log(res.data);
@@ -46,7 +46,7 @@ class Home extends Component {
       })
       .catch(err => console.log(err));
 
-    console.log("state: ", this.state);
+    //console.log("state: ", this.state);
   };
 
   render() {
@@ -55,7 +55,7 @@ class Home extends Component {
         <Row>
           <h1 id="title"> Welcome to OMP </h1>
         </Row>
-        <Form row>
+        {/* <Form row>
           <FormGroup row>
             <Label for="day" sm={2}>
               Day of Week
@@ -80,10 +80,12 @@ class Home extends Component {
               </Input>
             </Col>
             <Col sm="2">
-              <Button onClick={this.loadMics}>Submit</Button>
+              <Button onClick={() => this.loadMics(this.state.day)}>
+                Submit
+              </Button>
             </Col>
           </FormGroup>
-        </Form>
+        </Form> */}
         <Row>
           <Col id="maincol" xs="10">
             {this.state.mics.length ? (
@@ -100,9 +102,19 @@ class Home extends Component {
             )}
           </Col>
           <Col xs="2">
-            <Link to={"/newmic"}>
-              <h5>Add a Mic</h5>
-            </Link>
+            <h5 onClick={() => this.loadMics("Sunday")}>Sunday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("Monday")}>Monday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("Tuesday")}>Tuesday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("Wednesday")}>Wednesday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("Thursday")}>Thursday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("Friday")}>Friday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("Saturday")}>Saturday</h5>
           </Col>
         </Row>
       </Container>
