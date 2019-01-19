@@ -21,5 +21,13 @@ export default {
   //Saves a user
   saveUser: function(userData) {
     return axios.post("/auth", userData);
+  },
+  //Saves a user
+  LoginUser: function(userData) {
+    return axios.post("/auth/login", userData);
+  },
+
+  getUser: function(userData) {
+    return axios.get("/auth");
   }
 };

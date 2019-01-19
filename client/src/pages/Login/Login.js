@@ -30,10 +30,10 @@ export default class Login extends Component {
     event.preventDefault();
     //cleaner way to do this with destructuring or w/e?
     if (this.state.username && this.state.password) {
-      // API.saveUser({
-      //   username: this.state.username,
-      //   password: this.state.password
-      // }).catch(err => console.log(err));
+      API.LoginUser({
+        username: this.state.username,
+        password: this.state.password
+      }).catch(err => console.log(err));
       //   .then(() => this.props.history.push(`/mics`));
 
       console.log("be more");
