@@ -39,9 +39,12 @@ export default class Example extends React.Component {
                 <NavLink href="/signup">Sign Up</NavLink>
               </NavItem>
               <NavItem>
+                <NavLink href="/login">Log In</NavLink>
+              </NavItem>
+              <NavItem>
                 <NavLink href="/newmic">Add a Mic</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
@@ -51,7 +54,7 @@ export default class Example extends React.Component {
                   <DropdownItem divider />
                   <DropdownItem>Reset</DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
         </Navbar>
