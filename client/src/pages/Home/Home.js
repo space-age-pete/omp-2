@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import EventCard from "../../components/EventCard";
 import "./Home.css";
 import API from "../../utils/API";
 import {
@@ -33,7 +34,7 @@ class Home extends Component {
     this.setState({
       [name]: value
     });
-    //console.log(this.state.day);
+    setTimeout(() => console.log(this.state.day), 300);
   };
 
   loadMics = () => {
@@ -45,7 +46,7 @@ class Home extends Component {
       })
       .catch(err => console.log(err));
 
-    console.log("state: ", this.state.mics);
+    console.log("state: ", this.state);
   };
 
   render() {
@@ -84,20 +85,21 @@ class Home extends Component {
           </FormGroup>
         </Form>
         <Row>
-          <Col id="maincol" xs="8">
+          <Col id="maincol" xs="10">
             {this.state.mics.length ? (
               <div>
                 {this.state.mics.map(mic => (
-                  <h5 key={mic._id}>
-                    <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
-                  </h5>
+                  <EventCard key={mic._id} mic={mic} />
+                  // <h5 key={mic._id}>
+                  //   <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
+                  // </h5>
                 ))}
               </div>
             ) : (
               <h5>nothin' doin'</h5>
             )}
           </Col>
-          <Col xs="4">
+          <Col xs="2">
             <Link to={"/newmic"}>
               <h5>Add a Mic</h5>
             </Link>
@@ -111,3 +113,9 @@ class Home extends Component {
 export default Home;
 
 //<h5>{this.state.mics[0].micName}</h5>
+
+{
+  /* <h5 key={mic._id}>
+  <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
+</h5>; */
+}

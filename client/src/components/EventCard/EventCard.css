@@ -1,0 +1,15 @@
+a {
+    color: white;
+    text-decoration: none;
+}
+
+.ECardIMG {
+    height: 100px;
+    width: 100px;
+}
+
+.ECardCard {
+    /* width: 70%; */
+    width: 400px;
+    margin-bottom: 20px;
+}
