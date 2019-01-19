@@ -115,6 +115,8 @@ class Home extends Component {
             <h5 onClick={() => this.loadMics("Friday")}>Friday</h5>
             <br />
             <h5 onClick={() => this.loadMics("Saturday")}>Saturday</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("")}>All Mics</h5>
           </Col>
         </Row>
       </Container>

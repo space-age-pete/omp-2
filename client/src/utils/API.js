@@ -17,5 +17,9 @@ export default {
   // Saves a mic to the database
   saveMic: function(micData) {
     return axios.post("/api/mics", micData);
+  },
+  //Saves a user
+  saveUser: function(userData) {
+    return axios.post("/auth", userData);
   }
 };
