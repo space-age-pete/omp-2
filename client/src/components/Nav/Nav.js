@@ -35,26 +35,36 @@ export default class Example extends React.Component {
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href="/signup">Sign Up</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink href="/login">Log In</NavLink>
-              </NavItem>
+              {!this.props.loggedIn ? (
+                <div>
+                  <NavItem>
+                    <NavLink href="/signup">Sign Up</NavLink>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink href="/login">Log In</NavLink>
+                  </NavItem>
+                </div>
+              ) : (
+                <NavItem>
+                  <NavLink href="#" onClick={this.props.logout}>
+                    Log Out
+                  </NavLink>
+                </NavItem>
+              )}
               <NavItem>
                 <NavLink href="/newmic">Add a Mic</NavLink>
               </NavItem>
-              {/* <UncontrolledDropdown nav inNavbar>
+              <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
                 <DropdownMenu right>
-                  <DropdownItem>Option 1</DropdownItem>
-                  <DropdownItem>Option 2</DropdownItem>
+                  <DropdownItem>My Profile</DropdownItem>
+                  <DropdownItem>Log Out</DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>Reset</DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown> */}
+              </UncontrolledDropdown>
             </Nav>
           </Collapse>
         </Navbar>

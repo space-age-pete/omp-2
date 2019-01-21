@@ -24,6 +24,22 @@ class App extends Component {
     this.setState(userObject);
   };
 
+  logOutUser = () => {
+    API.logOutUser()
+      .then(response => {
+        console.log(response.data);
+        if (response.status === 200) {
+          this.setState({
+            loggedIn: false,
+            username: null
+          });
+        }
+      })
+      .catch(error => {
+        console.log("Logout error: ", error);
+      });
+  };
+
   getUser = () => {
     API.getUser().then(response => {
       console.log("Get user response: ");
@@ -49,7 +65,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Nav loggedIn={this.state.loggedIn} logout={this.logOutUser} />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/mics" component={Home} />
