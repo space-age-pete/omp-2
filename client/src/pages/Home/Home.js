@@ -21,7 +21,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.loadMics(this.state.day);
+    this.loadMics("day", this.state.day);
   }
 
   componentDidUpdate() {
@@ -37,8 +37,9 @@ class Home extends Component {
     setTimeout(() => console.log(this.state.day), 300);
   };
 
-  loadMics = day => {
-    let theParams = day ? { day: day } : "";
+  loadMics = (key, value) => {
+    //let theParams = day ? { day: day } : "";
+    let theParams = { [key]: value };
     API.getMics({ params: theParams })
       .then(res => {
         console.log(res.data);
@@ -102,21 +103,25 @@ class Home extends Component {
             )}
           </Col>
           <Col xs="2">
-            <h5 onClick={() => this.loadMics("Sunday")}>Sunday</h5>
+            <h5 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("Monday")}>Monday</h5>
+            <h5 onClick={() => this.loadMics("day", "Monday")}>Monday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("Tuesday")}>Tuesday</h5>
+            <h5 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("Wednesday")}>Wednesday</h5>
+            <h5 onClick={() => this.loadMics("day", "Wednesday")}>Wednesday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("Thursday")}>Thursday</h5>
+            <h5 onClick={() => this.loadMics("day", "Thursday")}>Thursday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("Friday")}>Friday</h5>
+            <h5 onClick={() => this.loadMics("day", "Friday")}>Friday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("Saturday")}>Saturday</h5>
+            <h5 onClick={() => this.loadMics("day", "Saturday")}>Saturday</h5>
             <br />
-            <h5 onClick={() => this.loadMics("")}>All Mics</h5>
+            <h5 onClick={() => this.loadMics("", "")}>All Mics</h5>
+            <br />
+            <h5 onClick={() => this.loadMics("userID", this.props.userID)}>
+              My Mics
+            </h5>
           </Col>
         </Row>
       </Container>

@@ -13,7 +13,8 @@ import "./App.css";
 class App extends Component {
   state = {
     loggedIn: false,
-    username: null
+    username: null,
+    userID: null
   };
 
   componentDidMount() {
@@ -31,7 +32,8 @@ class App extends Component {
         if (response.status === 200) {
           this.setState({
             loggedIn: false,
-            username: null
+            username: null,
+            userID: null
           });
         }
       })
@@ -49,13 +51,15 @@ class App extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          userID: response.data.user._id
         });
       } else {
         console.log("Get user: no user");
         this.setState({
           loggedIn: false,
-          username: null
+          username: null,
+          userID: null
         });
       }
     });
@@ -67,13 +71,36 @@ class App extends Component {
         <div>
           <Nav loggedIn={this.state.loggedIn} logout={this.logOutUser} />
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/mics" component={Home} />
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  loggedIn={this.state.loggedIn}
+                  userID={this.state.userID}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/mics"
+              render={() => (
+                <Home
+                  loggedIn={this.state.loggedIn}
+                  userID={this.state.userID}
+                />
+              )}
+            />
             <Route exact path="/mics/:id" component={Detail} />
             <Route
               exact
               path="/newmic"
-              render={() => <AddMic loggedIn={this.state.loggedIn} />}
+              render={() => (
+                <AddMic
+                  loggedIn={this.state.loggedIn}
+                  userID={this.state.userID}
+                />
+              )}
             />
             <Route exact path="/signup" component={SignUp} />
             <Route

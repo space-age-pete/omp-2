@@ -14,7 +14,8 @@ const micSchema = new Schema({
   phone: String,
   additionalInfo: String,
   date: { type: Date, default: Date.now },
-  img: { type: String }
+  img: { type: String },
+  userID: String
 });
 
 const Mic = mongoose.model("Mic", micSchema);

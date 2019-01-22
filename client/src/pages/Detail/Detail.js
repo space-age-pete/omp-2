@@ -66,7 +66,6 @@ class Detail extends Component {
         </Row>
         <br />
         <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
-        <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
       </Container>
     );
   }

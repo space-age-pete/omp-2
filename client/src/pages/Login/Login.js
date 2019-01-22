@@ -16,8 +16,8 @@ import {
 
 export default class Login extends Component {
   state = {
-    username: "",
-    password: "",
+    username: "josh",
+    password: "josh",
     redirectTo: null
   };
 
@@ -39,11 +39,13 @@ export default class Login extends Component {
         .then(response => {
           console.log("login response: ");
           console.log(response);
+          console.log("response.data: ", response.config);
           if (response.status === 200) {
             // update App.js state
             this.props.updateUser({
               loggedIn: true,
-              username: response.data.username
+              username: response.data.username,
+              userID: response.data.id
             });
             // update the state to redirect to home
             this.setState({
