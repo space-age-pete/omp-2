@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 import {
   Col,
@@ -16,7 +17,8 @@ import {
 export default class Login extends Component {
   state = {
     username: "",
-    password: ""
+    password: "",
+    redirectTo: null
   };
 
   handleInputChange = event => {
@@ -33,7 +35,23 @@ export default class Login extends Component {
       API.LoginUser({
         username: this.state.username,
         password: this.state.password
-      }).catch(err => console.log(err));
+      })
+        .then(response => {
+          console.log("login response: ");
+          console.log(response);
+          if (response.status === 200) {
+            // update App.js state
+            this.props.updateUser({
+              loggedIn: true,
+              username: response.data.username
+            });
+            // update the state to redirect to home
+            this.setState({
+              redirectTo: "/"
+            });
+          }
+        })
+        .catch(err => console.log(err));
       //   .then(() => this.props.history.push(`/mics`));
 
       console.log("be more");
@@ -43,49 +61,53 @@ export default class Login extends Component {
   };
 
   render() {
-    return (
-      <Container>
-        <Form>
-          <FormGroup row>
-            <Label for="username" sm={2}>
-              Username<span className="asterisk">&nbsp;*</span>
-            </Label>
-            <Col sm={10}>
-              <Input
-                value={this.state.username}
-                onChange={this.handleInputChange}
-                type="text"
-                name="username"
-                id="username"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="password" sm={2}>
-              Password<span className="asterisk">&nbsp;*</span>
-            </Label>
-            <Col sm={10}>
-              <Input
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                type="password"
-                name="password"
-                id="password"
-              />
-            </Col>
-          </FormGroup>
-          <FormGroup check row>
-            <Col sm={{ size: 10, offset: 2 }}>
-              <Button
-                disabled={!(this.state.username && this.state.password)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit
-              </Button>
-            </Col>
-          </FormGroup>
-        </Form>
-      </Container>
-    );
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />;
+    } else {
+      return (
+        <Container>
+          <Form>
+            <FormGroup row>
+              <Label for="username" sm={2}>
+                Username<span className="asterisk">&nbsp;*</span>
+              </Label>
+              <Col sm={10}>
+                <Input
+                  value={this.state.username}
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="username"
+                  id="username"
+                />
+              </Col>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="password" sm={2}>
+                Password<span className="asterisk">&nbsp;*</span>
+              </Label>
+              <Col sm={10}>
+                <Input
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+              </Col>
+            </FormGroup>
+            <FormGroup check row>
+              <Col sm={{ size: 10, offset: 2 }}>
+                <Button
+                  disabled={!(this.state.username && this.state.password)}
+                  onClick={this.handleFormSubmit}
+                >
+                  Submit
+                </Button>
+              </Col>
+            </FormGroup>
+          </Form>
+        </Container>
+      );
+    }
   }
 }

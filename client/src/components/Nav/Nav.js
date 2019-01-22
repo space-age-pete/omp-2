@@ -60,7 +60,9 @@ export default class Example extends React.Component {
                 </DropdownToggle>
                 <DropdownMenu right>
                   <DropdownItem>My Profile</DropdownItem>
-                  <DropdownItem>Log Out</DropdownItem>
+                  <DropdownItem onClick={this.props.logout}>
+                    Log Out
+                  </DropdownItem>
                   <DropdownItem divider />
                   <DropdownItem>Reset</DropdownItem>
                 </DropdownMenu>

@@ -52,12 +52,15 @@ router.post(
     var userInfo = {
       username: req.user.username
     };
-    res.send(userInfo);
+    //res.send(userInfo);
+    res.redirect("/");
   }
 );
 
 router.post("/logout", (req, res) => {
   if (req.user) {
+    console.log("req.user yes, tryna log out");
+    req.logout();
     res.send({ msg: "logging out" });
   } else {
     res.send({ msg: "no user to log out" });

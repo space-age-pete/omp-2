@@ -39,7 +39,15 @@ export default class SignUp extends Component {
       API.saveUser({
         username: this.state.username,
         password: this.state.password
-      }).catch(err => console.log(err));
+      })
+        .then(
+          API.LoginUser({
+            username: this.state.username,
+            password: this.state.password
+          })
+        )
+        .then(() => this.props.history.push(`/mics`))
+        .catch(err => console.log(err));
       //   .then(() => this.props.history.push(`/mics`));
 
       console.log("be more");

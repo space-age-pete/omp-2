@@ -70,10 +70,21 @@ class App extends Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/mics" component={Home} />
             <Route exact path="/mics/:id" component={Detail} />
-            <Route exact path="/newmic" component={AddMic} />
+            <Route
+              exact
+              path="/newmic"
+              render={() => <AddMic loggedIn={this.state.loggedIn} />}
+            />
             <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/login" component={Login} />
+            <Route
+              exact
+              path="/login"
+              render={() => <Login updateUser={this.updateUser} />}
+            />
           </Switch>
+          <button onClick={() => console.log(this.state)}>
+            click for state
+          </button>
         </div>
       </Router>
     );
