@@ -33,5 +33,9 @@ export default {
 
   logOutUser: function(userData) {
     return axios.post("/auth/logout", userData);
+  },
+
+  updateUser: function(userData) {
+    return axios.post("/api/users", userData);
   }
 };

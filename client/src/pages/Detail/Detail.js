@@ -42,6 +42,10 @@ class Detail extends Component {
       );
   };
 
+  // addToFavorites = () => {
+
+  // }
+
   render() {
     return (
       <Container className="detailContainer">
@@ -61,6 +65,7 @@ class Detail extends Component {
           </Col>
         </Row>
         <br />
+        <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
         <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
       </Container>
     );
