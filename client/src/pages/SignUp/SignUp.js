@@ -6,12 +6,12 @@ import {
   Button,
   Form,
   FormGroup,
-  FormText,
   Label,
   Input,
-  Row,
-  Container
+  Container,
+  Jumbotron
 } from "reactstrap";
+//import "../SignUp/SignUp.css";
 import "./SignUp.css";
 
 export default class SignUp extends Component {
@@ -59,12 +59,13 @@ export default class SignUp extends Component {
   render() {
     return (
       <Container>
-        <Form>
-          <FormGroup row>
-            <Label for="username" sm={2}>
-              Username<span className="asterisk">&nbsp;*</span>
-            </Label>
-            <Col sm={10}>
+        <Jumbotron className="formJumbo">
+          <Form>
+            <FormGroup row>
+              <Label for="username">
+                Username<span className="asterisk">&nbsp;*</span>
+              </Label>
+
               <Input
                 value={this.state.username}
                 onChange={this.handleInputChange}
@@ -72,13 +73,12 @@ export default class SignUp extends Component {
                 name="username"
                 id="username"
               />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="password" sm={2}>
-              Password<span className="asterisk">&nbsp;*</span>
-            </Label>
-            <Col sm={10}>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="password">
+                Password<span className="asterisk">&nbsp;*</span>
+              </Label>
+
               <Input
                 value={this.state.password}
                 onChange={this.handleInputChange}
@@ -86,13 +86,12 @@ export default class SignUp extends Component {
                 name="password"
                 id="password"
               />
-            </Col>
-          </FormGroup>
-          <FormGroup row>
-            <Label for="confirmPassword" sm={2}>
-              Confirm Password<span className="asterisk">&nbsp;*</span>
-            </Label>
-            <Col sm={10}>
+            </FormGroup>
+            <FormGroup row>
+              <Label for="confirmPassword">
+                Confirm Password<span className="asterisk">&nbsp;*</span>
+              </Label>
+
               <Input
                 value={this.state.confirmPassword}
                 onChange={this.handleInputChange}
@@ -100,10 +99,9 @@ export default class SignUp extends Component {
                 name="confirmPassword"
                 id="confirmPassword"
               />
-            </Col>
-          </FormGroup>
-          <FormGroup check row>
-            <Col sm={{ size: 10, offset: 2 }}>
+            </FormGroup>
+            <FormGroup check row>
+              {/* <Col sm={{ size: 10, offset: 2 }}> */}
               <Button
                 disabled={
                   !(
@@ -116,10 +114,11 @@ export default class SignUp extends Component {
               >
                 Submit
               </Button>
-            </Col>
-          </FormGroup>
-          <Button onClick={() => console.log(this.state)} />
-        </Form>
+              {/* </Col> */}
+            </FormGroup>
+            {/* <Button onClick={() => console.log(this.state)} /> */}
+          </Form>
+        </Jumbotron>
       </Container>
     );
   }

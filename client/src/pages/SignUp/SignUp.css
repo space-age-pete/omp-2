@@ -1,3 +1,13 @@
 .asterisk{
     color: red;
 }
+
+.formJumbo {
+    width: 75%;
+    margin: auto;
+    background-color: red;
+}
+
+.jumbotron {
+    background-color: purple;
+}

@@ -7,12 +7,14 @@ import {
   Button,
   Form,
   FormGroup,
-  FormText,
   Label,
   Input,
-  Row,
-  Container
+  Container,
+  Jumbotron
 } from "reactstrap";
+//import "../SignUp/SignUp.css";
+
+//FormText, Row,
 
 export default class Login extends Component {
   state = {
@@ -68,46 +70,48 @@ export default class Login extends Component {
     } else {
       return (
         <Container>
-          <Form>
-            <FormGroup row>
-              <Label for="username" sm={2}>
-                Username<span className="asterisk">&nbsp;*</span>
-              </Label>
-              <Col sm={10}>
-                <Input
-                  value={this.state.username}
-                  onChange={this.handleInputChange}
-                  type="text"
-                  name="username"
-                  id="username"
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="password" sm={2}>
-                Password<span className="asterisk">&nbsp;*</span>
-              </Label>
-              <Col sm={10}>
-                <Input
-                  value={this.state.password}
-                  onChange={this.handleInputChange}
-                  type="password"
-                  name="password"
-                  id="password"
-                />
-              </Col>
-            </FormGroup>
-            <FormGroup check row>
-              <Col sm={{ size: 10, offset: 2 }}>
-                <Button
-                  disabled={!(this.state.username && this.state.password)}
-                  onClick={this.handleFormSubmit}
-                >
-                  Submit
-                </Button>
-              </Col>
-            </FormGroup>
-          </Form>
+          <Jumbotron className="formJumbo">
+            <Form>
+              <FormGroup row>
+                <Label for="username" sm={2}>
+                  Username<span className="asterisk">&nbsp;*</span>
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    value={this.state.username}
+                    onChange={this.handleInputChange}
+                    type="text"
+                    name="username"
+                    id="username"
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="password" sm={2}>
+                  Password<span className="asterisk">&nbsp;*</span>
+                </Label>
+                <Col sm={10}>
+                  <Input
+                    value={this.state.password}
+                    onChange={this.handleInputChange}
+                    type="password"
+                    name="password"
+                    id="password"
+                  />
+                </Col>
+              </FormGroup>
+              <FormGroup check row>
+                <Col sm={{ size: 10, offset: 2 }}>
+                  <Button
+                    disabled={!(this.state.username && this.state.password)}
+                    onClick={this.handleFormSubmit}
+                  >
+                    Submit
+                  </Button>
+                </Col>
+              </FormGroup>
+            </Form>
+          </Jumbotron>
         </Container>
       );
     }

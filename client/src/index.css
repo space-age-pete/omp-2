@@ -24,3 +24,18 @@ code {
 a {
   color: white;
 }
+
+.asterisk{
+  color: rgb(161, 1, 1);
+}
+
+.formJumbo {
+  width: 75%;
+  margin: auto;
+  /* background-color: red; */
+  padding: 64px;
+}
+
+/* .jumbotron {
+  background-color: purple;
+} */
