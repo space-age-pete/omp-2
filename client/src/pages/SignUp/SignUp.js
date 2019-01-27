@@ -18,14 +18,47 @@ export default class SignUp extends Component {
   state = {
     username: "",
     password: "",
-    confirmPassword: ""
+    confirmPassword: "",
+    usernameValid: "",
+    passwordValid: "",
+    confirmPasswordValid: "",
+    valid: { username: "", password: "", confirmPassword: "" }
   };
 
   handleInputChange = event => {
     const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState(
+      {
+        [name]: value
+      },
+      this.validate(name, value)
+    );
+    // if (name === "confirmPassword") {
+    //   console.log(event.target);
+    //   //event.target.setAttribute("valid", "");
+    //   this.setState({ passwordValid: "is-valid" });
+    // }
+  };
+
+  validate = (field, value) => {
+    let other = "";
+
+    switch (field) {
+      case "username":
+        other = "usernameValid";
+        break;
+      case "password":
+        other = "passwordValid";
+        break;
+      case "confirmPassword":
+        other = "confirmPasswordValid";
+        break;
+    }
+    if (value.length > 6) {
+      this.setState({ [other]: "is-valid" }, () => console.log(this.state));
+    } else {
+      this.setState({ [other]: "is-invalid" }, () => console.log(this.state));
+    }
   };
 
   handleFormSubmit = event => {
@@ -67,6 +100,7 @@ export default class SignUp extends Component {
               </Label>
 
               <Input
+                className={this.state.usernameValid}
                 value={this.state.username}
                 onChange={this.handleInputChange}
                 type="text"
@@ -80,6 +114,8 @@ export default class SignUp extends Component {
               </Label>
 
               <Input
+                //{this.state.passwordValid}
+                className={this.state.passwordValid}
                 value={this.state.password}
                 onChange={this.handleInputChange}
                 type="password"
@@ -93,6 +129,8 @@ export default class SignUp extends Component {
               </Label>
 
               <Input
+                //valid
+                className={this.state.confirmPasswordValid}
                 value={this.state.confirmPassword}
                 onChange={this.handleInputChange}
                 type="password"
