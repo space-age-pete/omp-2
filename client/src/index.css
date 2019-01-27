@@ -39,3 +39,8 @@ a {
 /* .jumbotron {
   background-color: purple;
 } */
+
+.navbar{
+  margin-bottom: 50px;
+  background-color: rgb(119, 101, 148);
+}

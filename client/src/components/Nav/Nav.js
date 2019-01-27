@@ -30,20 +30,20 @@ export default class Example extends React.Component {
   render() {
     return (
       <div>
-        <Navbar color="light" light expand="md">
+        <Navbar dark expand="md">
           <NavbarBrand href="/">Open Mic Project</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
+              {!this.props.loggedIn && (
+                <NavItem>
+                  <NavLink href="/signup">Sign Up</NavLink>
+                </NavItem>
+              )}
               {!this.props.loggedIn ? (
-                <div>
-                  <NavItem>
-                    <NavLink href="/signup">Sign Up</NavLink>
-                  </NavItem>
-                  <NavItem>
-                    <NavLink href="/login">Log In</NavLink>
-                  </NavItem>
-                </div>
+                <NavItem>
+                  <NavLink href="/login">Log In</NavLink>
+                </NavItem>
               ) : (
                 <NavItem>
                   <NavLink href="#" onClick={this.props.logout}>

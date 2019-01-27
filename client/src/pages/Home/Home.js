@@ -3,16 +3,13 @@ import { Link } from "react-router-dom";
 import EventCard from "../../components/EventCard";
 import "./Home.css";
 import API from "../../utils/API";
-import {
-  Container,
-  Row,
-  Col,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Button
-} from "reactstrap";
+import { Container, Row, Col, Jumbotron } from "reactstrap";
+
+// Form,
+//   FormGroup,
+//   Label,
+//   Input,
+//   Button,
 
 class Home extends Component {
   state = {
@@ -21,7 +18,7 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    this.loadMics("day", this.state.day);
+    this.loadMics("", this.state.day);
   }
 
   componentDidUpdate() {
@@ -87,43 +84,47 @@ class Home extends Component {
             </Col>
           </FormGroup>
         </Form> */}
-        <Row>
-          <Col id="maincol" xs="10">
-            {this.state.mics.length ? (
-              <div>
-                {this.state.mics.map(mic => (
-                  <EventCard key={mic._id} mic={mic} />
-                  // <h5 key={mic._id}>
-                  //   <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
-                  // </h5>
-                ))}
-              </div>
-            ) : (
-              <h5>nothin' doin'</h5>
-            )}
-          </Col>
-          <Col xs="2">
-            <h5 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("day", "Monday")}>Monday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("day", "Wednesday")}>Wednesday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("day", "Thursday")}>Thursday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("day", "Friday")}>Friday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("day", "Saturday")}>Saturday</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("", "")}>All Mics</h5>
-            <br />
-            <h5 onClick={() => this.loadMics("userID", this.props.userID)}>
-              My Mics
-            </h5>
-          </Col>
-        </Row>
+        <Jumbotron>
+          <Row>
+            <Col id="maincol" xs="9">
+              {this.state.mics.length ? (
+                <div>
+                  {this.state.mics.map(mic => (
+                    <EventCard key={mic._id} mic={mic} />
+                    // <h5 key={mic._id}>
+                    //   <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
+                    // </h5>
+                  ))}
+                </div>
+              ) : (
+                <h5>nothin' doin'</h5>
+              )}
+            </Col>
+            <Col xs="3">
+              <h4 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("day", "Monday")}>Monday</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("day", "Wednesday")}>
+                Wednesday
+              </h4>
+              <br />
+              <h4 onClick={() => this.loadMics("day", "Thursday")}>Thursday</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("day", "Friday")}>Friday</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("day", "Saturday")}>Saturday</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("", "")}>All Mics</h4>
+              <br />
+              <h4 onClick={() => this.loadMics("userID", this.props.userID)}>
+                My Mics
+              </h4>
+            </Col>
+          </Row>
+        </Jumbotron>
       </Container>
     );
   }
