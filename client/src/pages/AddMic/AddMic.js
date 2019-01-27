@@ -16,17 +16,19 @@ import {
 
 export default class AddMic extends Component {
   state = {
-    micName: "TIME MIC",
-    locationName: "PLACE",
-    address: "123",
+    micName: "",
+    locationName: "",
+    address: "",
     signUpTime: "",
     startTime: "",
     day: "",
-    website: "TIME.COM",
-    slotLength: 0,
+    website: "",
+    slotLength: "",
     host: "",
+    additionalInfo: "",
     micImage: null,
-    loggedIn: false
+    loggedIn: false,
+    redirectTo: null
   };
 
   dayConvert = arg => {
@@ -43,6 +45,15 @@ export default class AddMic extends Component {
     else if (typeof arg === String) return week.indexOf(arg);
   };
 
+  timeConvert = arg => {
+    let firstBit = +arg.substring(0, 2);
+    let secondBit = arg.substring(2);
+    if (firstBit > 12) return `${firstBit - 12}${secondBit} PM`;
+    else if (firstBit === 0) return `12${secondBit} AM`;
+    else if (firstBit === 12) return `${arg} PM`;
+    else return `${arg} AM`;
+  };
+
   componentDidMount() {
     console.log("CDM props:", this.props);
     //setInterval(() => console.log("CDM props:", this.props), 50);
@@ -54,7 +65,7 @@ export default class AddMic extends Component {
     this.setState({
       [name]: value
     });
-    console.log("signup time", typeof this.state.signUpTime);
+    console.log("signup time", this.timeConvert(this.state.signUpTime));
   };
 
   fileSelectedHandler = event => {
@@ -78,10 +89,14 @@ export default class AddMic extends Component {
       fd.append("micName", this.state.micName);
       fd.append("locationName", this.state.locationName);
       fd.append("address", this.state.address);
-      fd.append("signUpTime", this.state.signUpTime);
-      fd.append("startTime", this.state.startTime);
+      fd.append("signUpTime", this.timeConvert(this.state.signUpTime));
+      fd.append("startTime", this.timeConvert(this.state.startTime));
       fd.append("day", this.state.day);
+      fd.append("slotLength", this.state.slotLength);
+      fd.append("host", this.state.host);
       fd.append("website", this.state.website);
+      fd.append("phone", "");
+      fd.append("additionalInfo", this.state.additionalInfo);
       fd.append("userID", this.props.userID);
       if (this.state.micImage)
         fd.append("micImage", this.state.micImage, this.state.micImage.name);
@@ -97,8 +112,12 @@ export default class AddMic extends Component {
       //   slotLength: this.state.slotLength,
       //   micImage: this.state.micImage
       // })
-      API.saveMic(fd).catch(err => console.log(err));
-      //.then(() => this.props.history.push(`/mics`));
+      API.saveMic(fd)
+        .catch(err => console.log(err))
+        .then(res => {
+          console.log("res:", res.data.id);
+          this.setState({ redirectTo: `/mics/${res.data._id}` });
+        });
 
       //above redirect could be cleaner
     }
@@ -106,13 +125,13 @@ export default class AddMic extends Component {
 
   render() {
     // let logged = this.props.loggedIn;
-    // if (this.state.redirectTo) {
-    //   //return <Redirect to={{ pathname: this.state.redirectTo }} />;
-    //   return <div>somethin went rong</div>;
-    // } else {
-    return (
-      <Container>
-        {/* <Jumbotron className="formJumbo">
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />;
+      //return <div>somethin went rong</div>;
+    } else {
+      return (
+        <Container>
+          {/* <Jumbotron className="formJumbo">
           {this.props.loggedIn && <div>we logged in</div>}
           <Form>
             <FormGroup row>
@@ -289,186 +308,191 @@ export default class AddMic extends Component {
             <Button onClick={() => console.log(this.state, this.props)} />
           </Form>
         </Jumbotron> */}
-        <Jumbotron className="formJumbo">
-          {/* {this.props.loggedIn && <div>we logged in</div>} */}
-          <Form>
-            <FormGroup>
-              <Label for="micName">
-                Event Name<span className="asterisk">&nbsp;*</span>
-              </Label>
+          <Jumbotron className="formJumbo">
+            {/* {this.props.loggedIn && <div>we logged in</div>} */}
+            <Form>
+              <FormGroup>
+                <Label for="micName">
+                  Event Name<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                value={this.state.micName}
-                onChange={this.handleInputChange}
-                type="text"
-                name="micName"
-                id="micName"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="locationName">
-                Location Name<span className="asterisk">&nbsp;*</span>
-              </Label>
+                <Input
+                  value={this.state.micName}
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="micName"
+                  id="micName"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="locationName">
+                  Location Name<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                value={this.state.locationName}
-                onChange={this.handleInputChange}
-                type="text"
-                name="locationName"
-                id="locationName"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="address">
-                Address<span className="asterisk">&nbsp;*</span>
-              </Label>
+                <Input
+                  value={this.state.locationName}
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="locationName"
+                  id="locationName"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="address">
+                  Address<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                value={this.state.address}
-                onChange={this.handleInputChange}
-                type="text"
-                name="address"
-                id="address"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="day">
-                Day of Week<span className="asterisk">&nbsp;*</span>
-              </Label>
+                <Input
+                  value={this.state.address}
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="address"
+                  id="address"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="day">
+                  Day of Week<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                value={this.state.day}
-                onChange={this.handleInputChange}
-                type="select"
-                name="day"
-                id="day"
-              >
-                <option />
-                {/* <option disabled>Select</option> */}
-                <option>Sunday</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-              </Input>
-            </FormGroup>
-
-            <Row form>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="signUpTime">
-                    Sign Up Time<span className="asterisk">&nbsp;*</span>
-                  </Label>
-
-                  <Input
-                    value={this.state.signUpTime}
-                    onChange={this.handleInputChange}
-                    type="time"
-                    name="signUpTime"
-                    id="signUpTime"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="startTime">
-                    Start Time<span className="asterisk">&nbsp;*</span>
-                  </Label>
-
-                  <Input
-                    value={this.state.startTime}
-                    onChange={this.handleInputChange}
-                    type="date"
-                    name="startTime"
-                    id="startTime"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-
-            <Row form>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="slotLength">Slot Length (minutes)</Label>
-                  <Input
-                    value={this.state.slotLength}
-                    onChange={this.handleInputChange}
-                    type="number"
-                    name="slotLength"
-                    id="slotLength"
-                  />
-                </FormGroup>
-              </Col>
-              <Col md={6}>
-                <FormGroup>
-                  <Label for="host">Host</Label>
-                  <Input
-                    value={this.state.host}
-                    onChange={this.handleInputChange}
-                    type="text"
-                    name="host"
-                    id="host"
-                  />
-                </FormGroup>
-              </Col>
-            </Row>
-            <FormGroup>
-              <Label for="website">Website</Label>
-
-              <Input
-                value={this.state.website}
-                onChange={this.handleInputChange}
-                type="text"
-                name="website"
-                id="website"
-              />
-            </FormGroup>
-            <FormGroup>
-              <Label for="exampleText">Additional Info</Label>
-
-              <Input type="textarea" name="text" id="exampleText" />
-            </FormGroup>
-            <FormGroup>
-              <Label for="micImage">Image</Label>
-
-              <Input
-                onChange={this.fileSelectedHandler}
-                type="file"
-                name="micImage"
-                id="micImage"
-              />
-              <FormText color="muted">
-                This is some placeholder block-level help text for the above
-                input. It's a bit lighter and easily wraps to a new line.
-              </FormText>
-            </FormGroup>
-            <FormGroup check>
-              <Col>
-                <Button
-                  disabled={
-                    !(
-                      this.state.micName &&
-                      this.state.locationName &&
-                      this.state.address &&
-                      this.state.signUpTime &&
-                      this.state.startTime &&
-                      this.state.day &&
-                      this.props.loggedIn
-                    )
-                  }
-                  onClick={this.handleFormSubmit}
+                <Input
+                  value={this.state.day}
+                  onChange={this.handleInputChange}
+                  type="select"
+                  name="day"
+                  id="day"
                 >
-                  Submit
-                </Button>
-              </Col>
-            </FormGroup>
-            <Button onClick={() => console.log(this.state, this.props)} />
-          </Form>
-        </Jumbotron>
-      </Container>
-    );
-    //}
+                  <option />
+                  {/* <option disabled>Select</option> */}
+                  <option>Sunday</option>
+                  <option>Monday</option>
+                  <option>Tuesday</option>
+                  <option>Wednesday</option>
+                  <option>Thursday</option>
+                  <option>Friday</option>
+                  <option>Saturday</option>
+                </Input>
+              </FormGroup>
+
+              <Row form>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="signUpTime">
+                      Sign Up Time<span className="asterisk">&nbsp;*</span>
+                    </Label>
+
+                    <Input
+                      value={this.state.signUpTime}
+                      onChange={this.handleInputChange}
+                      type="time"
+                      name="signUpTime"
+                      id="signUpTime"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="startTime">
+                      Start Time<span className="asterisk">&nbsp;*</span>
+                    </Label>
+
+                    <Input
+                      value={this.state.startTime}
+                      onChange={this.handleInputChange}
+                      type="time"
+                      name="startTime"
+                      id="startTime"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+
+              <Row form>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="slotLength">Slot Length (minutes)</Label>
+                    <Input
+                      value={this.state.slotLength}
+                      onChange={this.handleInputChange}
+                      type="number"
+                      name="slotLength"
+                      id="slotLength"
+                    />
+                  </FormGroup>
+                </Col>
+                <Col md={6}>
+                  <FormGroup>
+                    <Label for="host">Host</Label>
+                    <Input
+                      value={this.state.host}
+                      onChange={this.handleInputChange}
+                      type="text"
+                      name="host"
+                      id="host"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <FormGroup>
+                <Label for="website">Website</Label>
+
+                <Input
+                  value={this.state.website}
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="website"
+                  id="website"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="exampleText">Additional Info</Label>
+
+                <Input
+                  value={this.state.additionalInfo}
+                  onChange={this.handleInputChange}
+                  type="textarea"
+                  name="additionalInfo"
+                  id="additionalInfo"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="micImage">Image</Label>
+
+                <Input
+                  onChange={this.fileSelectedHandler}
+                  type="file"
+                  name="micImage"
+                  id="micImage"
+                />
+                <FormText color="muted">
+                  Works best if the image is a square.
+                </FormText>
+              </FormGroup>
+              <FormGroup check>
+                <Col>
+                  <Button
+                    disabled={
+                      !(
+                        this.state.micName &&
+                        this.state.locationName &&
+                        this.state.address &&
+                        this.state.signUpTime &&
+                        this.state.startTime &&
+                        this.state.day &&
+                        this.props.loggedIn
+                      )
+                    }
+                    onClick={this.handleFormSubmit}
+                  >
+                    Submit
+                  </Button>
+                </Col>
+              </FormGroup>
+              {/* <Button onClick={() => console.log(this.state, this.props)} /> */}
+            </Form>
+          </Jumbotron>
+        </Container>
+      );
+    }
   }
 }

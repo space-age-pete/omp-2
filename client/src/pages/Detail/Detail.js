@@ -60,8 +60,8 @@ class Detail extends Component {
             <h5>{this.state.mic.address}</h5>
             <br />
             <br />
-            <h4>List at {this.state.mic.signUpTime} PM </h4>
-            <h4>Show at {this.state.mic.startTime} PM</h4>
+            <h4>List at {this.state.mic.signUpTime}</h4>
+            <h4>Show at {this.state.mic.startTime}</h4>
           </Col>
         </Row>
         <br />
