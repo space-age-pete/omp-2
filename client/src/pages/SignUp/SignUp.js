@@ -85,6 +85,18 @@ export default class SignUp extends Component {
     if (cb) cb();
   };
 
+  usernameValidate = data => {
+    if (data.error) {
+      this.setState({ usernameValid: "is-invalid" }, () =>
+        console.log(this.state)
+      );
+    } else {
+      this.setState({ usernameValid: "is-valid" }, () =>
+        console.log(this.state)
+      );
+    }
+  };
+
   handleFormSubmit = event => {
     event.preventDefault();
     //cleaner way to do this with destructuring or w/e?
@@ -100,14 +112,18 @@ export default class SignUp extends Component {
         username: this.state.username,
         password: this.state.password
       })
-        .then(
-          API.LoginUser({
-            username: this.state.username,
-            password: this.state.password
-          })
-        )
+        .then(response => {
+          console.log("response: ", response);
+          this.usernameValidate(response.data);
+        })
+        // .then(
+        //   API.LoginUser({
+        //     username: this.state.username,
+        //     password: this.state.password
+        //   })
+        // )
         //.then(() => this.props.history.push(`/mics`))
-        .catch(err => console.log(err));
+        .catch(err => console.log("err: ", err));
       //   .then(() => this.props.history.push(`/mics`));
 
       console.log("be more");
@@ -135,6 +151,9 @@ export default class SignUp extends Component {
                 name="username"
                 id="username"
               />
+              <FormFeedback invalid="true">
+                That username is already taken
+              </FormFeedback>
             </FormGroup>
             <FormGroup row>
               <Label for="password">
