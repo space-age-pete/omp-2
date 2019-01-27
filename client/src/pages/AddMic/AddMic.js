@@ -16,16 +16,31 @@ import {
 
 export default class AddMic extends Component {
   state = {
-    micName: "",
-    locationName: "",
-    address: "",
+    micName: "TIME MIC",
+    locationName: "PLACE",
+    address: "123",
     signUpTime: "",
     startTime: "",
     day: "",
+    website: "TIME.COM",
     slotLength: 0,
     host: "",
     micImage: null,
     loggedIn: false
+  };
+
+  dayConvert = arg => {
+    let week = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ];
+    if (typeof arg === Number) return week[arg];
+    else if (typeof arg === String) return week.indexOf(arg);
   };
 
   componentDidMount() {
@@ -39,7 +54,7 @@ export default class AddMic extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.props.loggedIn);
+    console.log("signup time", typeof this.state.signUpTime);
   };
 
   fileSelectedHandler = event => {
@@ -66,6 +81,7 @@ export default class AddMic extends Component {
       fd.append("signUpTime", this.state.signUpTime);
       fd.append("startTime", this.state.startTime);
       fd.append("day", this.state.day);
+      fd.append("website", this.state.website);
       fd.append("userID", this.props.userID);
       if (this.state.micImage)
         fd.append("micImage", this.state.micImage, this.state.micImage.name);
@@ -81,9 +97,8 @@ export default class AddMic extends Component {
       //   slotLength: this.state.slotLength,
       //   micImage: this.state.micImage
       // })
-      API.saveMic(fd)
-        .catch(err => console.log(err))
-        .then(() => this.props.history.push(`/mics`));
+      API.saveMic(fd).catch(err => console.log(err));
+      //.then(() => this.props.history.push(`/mics`));
 
       //above redirect could be cleaner
     }
@@ -275,10 +290,12 @@ export default class AddMic extends Component {
           </Form>
         </Jumbotron> */}
         <Jumbotron className="formJumbo">
-          {this.props.loggedIn && <div>we logged in</div>}
+          {/* {this.props.loggedIn && <div>we logged in</div>} */}
           <Form>
-            <FormGroup row>
-              <Label for="micName">Event Name*</Label>
+            <FormGroup>
+              <Label for="micName">
+                Event Name<span className="asterisk">&nbsp;*</span>
+              </Label>
 
               <Input
                 value={this.state.micName}
@@ -286,11 +303,12 @@ export default class AddMic extends Component {
                 type="text"
                 name="micName"
                 id="micName"
-                placeholder="with a placeholder"
               />
             </FormGroup>
-            <FormGroup row>
-              <Label for="locationName">Location Name*</Label>
+            <FormGroup>
+              <Label for="locationName">
+                Location Name<span className="asterisk">&nbsp;*</span>
+              </Label>
 
               <Input
                 value={this.state.locationName}
@@ -298,11 +316,12 @@ export default class AddMic extends Component {
                 type="text"
                 name="locationName"
                 id="locationName"
-                placeholder="with a placeholder"
               />
             </FormGroup>
-            <FormGroup row>
-              <Label for="address">Address*</Label>
+            <FormGroup>
+              <Label for="address">
+                Address<span className="asterisk">&nbsp;*</span>
+              </Label>
 
               <Input
                 value={this.state.address}
@@ -310,11 +329,12 @@ export default class AddMic extends Component {
                 type="text"
                 name="address"
                 id="address"
-                placeholder="with a placeholder"
               />
             </FormGroup>
-            <FormGroup row>
-              <Label for="day">Day of Week*</Label>
+            <FormGroup>
+              <Label for="day">
+                Day of Week<span className="asterisk">&nbsp;*</span>
+              </Label>
 
               <Input
                 value={this.state.day}
@@ -324,6 +344,7 @@ export default class AddMic extends Component {
                 id="day"
               >
                 <option />
+                {/* <option disabled>Select</option> */}
                 <option>Sunday</option>
                 <option>Monday</option>
                 <option>Tuesday</option>
@@ -333,41 +354,50 @@ export default class AddMic extends Component {
                 <option>Saturday</option>
               </Input>
             </FormGroup>
-            <FormGroup row>
-              <Label for="signUpTime">Sign Up Time*</Label>
 
-              <Input
-                value={this.state.signUpTime}
-                onChange={this.handleInputChange}
-                type="text"
-                name="signUpTime"
-                id="signUpTime"
-                placeholder="with a placeholder"
-              />
-            </FormGroup>
-            <FormGroup row>
-              <Label for="startTime">Start Time*</Label>
-
-              <Input
-                value={this.state.startTime}
-                onChange={this.handleInputChange}
-                type="text"
-                name="startTime"
-                id="startTime"
-                placeholder="with a placeholder"
-              />
-            </FormGroup>
             <Row form>
               <Col md={6}>
                 <FormGroup>
-                  <Label for="slotLength">Slot Length</Label>
+                  <Label for="signUpTime">
+                    Sign Up Time<span className="asterisk">&nbsp;*</span>
+                  </Label>
+
+                  <Input
+                    value={this.state.signUpTime}
+                    onChange={this.handleInputChange}
+                    type="time"
+                    name="signUpTime"
+                    id="signUpTime"
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="startTime">
+                    Start Time<span className="asterisk">&nbsp;*</span>
+                  </Label>
+
+                  <Input
+                    value={this.state.startTime}
+                    onChange={this.handleInputChange}
+                    type="date"
+                    name="startTime"
+                    id="startTime"
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+
+            <Row form>
+              <Col md={6}>
+                <FormGroup>
+                  <Label for="slotLength">Slot Length (minutes)</Label>
                   <Input
                     value={this.state.slotLength}
                     onChange={this.handleInputChange}
                     type="number"
                     name="slotLength"
                     id="slotLength"
-                    placeholder="with a placeholder"
                   />
                 </FormGroup>
               </Col>
@@ -380,17 +410,27 @@ export default class AddMic extends Component {
                     type="text"
                     name="host"
                     id="host"
-                    placeholder="host placeholder"
                   />
                 </FormGroup>
               </Col>
             </Row>
-            <FormGroup row>
-              <Label for="exampleText">Text Area</Label>
+            <FormGroup>
+              <Label for="website">Website</Label>
+
+              <Input
+                value={this.state.website}
+                onChange={this.handleInputChange}
+                type="text"
+                name="website"
+                id="website"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="exampleText">Additional Info</Label>
 
               <Input type="textarea" name="text" id="exampleText" />
             </FormGroup>
-            <FormGroup row>
+            <FormGroup>
               <Label for="micImage">Image</Label>
 
               <Input
@@ -404,8 +444,8 @@ export default class AddMic extends Component {
                 input. It's a bit lighter and easily wraps to a new line.
               </FormText>
             </FormGroup>
-            <FormGroup check row>
-              <Col sm={{ size: 10, offset: 2 }}>
+            <FormGroup check>
+              <Col>
                 <Button
                   disabled={
                     !(
