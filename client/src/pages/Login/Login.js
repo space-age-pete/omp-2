@@ -10,7 +10,8 @@ import {
   Label,
   Input,
   Container,
-  Jumbotron
+  Jumbotron,
+  FormFeedback
 } from "reactstrap";
 //import "../SignUp/SignUp.css";
 
@@ -20,7 +21,8 @@ export default class Login extends Component {
   state = {
     username: "josh",
     password: "josh",
-    redirectTo: null
+    redirectTo: null,
+    valid: ""
   };
 
   handleInputChange = event => {
@@ -41,7 +43,8 @@ export default class Login extends Component {
         .then(response => {
           console.log("login response: ");
           console.log(response);
-          console.log("response.data: ", response.config);
+          //console.log("response.data: ", response.config);
+          console.log("status: ", response.status);
           if (response.status === 200) {
             // update App.js state
             this.props.updateUser({
@@ -55,7 +58,11 @@ export default class Login extends Component {
             });
           }
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          console.log(err);
+          //alert("username or password wrong");
+          this.setState({ valid: "is-invalid" });
+        });
       //   .then(() => this.props.history.push(`/mics`));
 
       console.log("be more");
@@ -78,6 +85,7 @@ export default class Login extends Component {
                 </Label>
                 <Col sm={10}>
                   <Input
+                    className={this.state.valid}
                     value={this.state.username}
                     onChange={this.handleInputChange}
                     type="text"
@@ -92,12 +100,16 @@ export default class Login extends Component {
                 </Label>
                 <Col sm={10}>
                   <Input
+                    className={this.state.valid}
                     value={this.state.password}
                     onChange={this.handleInputChange}
                     type="password"
                     name="password"
                     id="password"
                   />
+                  <FormFeedback invalid="true">
+                    Username or Password is incorrect
+                  </FormFeedback>
                 </Col>
               </FormGroup>
               <FormGroup check row>
