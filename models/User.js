@@ -14,8 +14,15 @@ const userSchema = new Schema({
     required: true
   },
   favorites: {
-    type: Array
+    type: [Schema.Types.ObjectId],
+    ref: "mic"
   }
+  // favorites: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: "mic"
+  //   }
+  // ]
 });
 
 // Define schema methods

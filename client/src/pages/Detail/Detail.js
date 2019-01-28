@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
 import API from "../../utils/API";
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container, Row, Col, Button, Jumbotron } from "reactstrap";
 import "./Detail.css";
 
 class Detail extends Component {
@@ -48,24 +48,27 @@ class Detail extends Component {
 
   render() {
     return (
-      <Container className="detailContainer">
-        <Row>
-          <Col sm={this.state.mic.img ? 4 : 0}>{this.imageTester()}</Col>
-          <Col sm={this.state.mic.img ? 8 : 12}>
-            <h1>{this.state.mic.micName}</h1>
-            <br />
-            <h3>
-              {this.state.mic.day}s at {this.state.mic.locationName}
-            </h3>
-            <h5>{this.state.mic.address}</h5>
-            <br />
-            <br />
-            <h4>List at {this.state.mic.signUpTime}</h4>
-            <h4>Show at {this.state.mic.startTime}</h4>
-          </Col>
-        </Row>
-        <br />
-        <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
+      //<Container className="detailContainer">
+      <Container>
+        <Jumbotron>
+          <Row>
+            <Col sm={this.state.mic.img ? 4 : 0}>{this.imageTester()}</Col>
+            <Col sm={this.state.mic.img ? 8 : 12}>
+              <h1>{this.state.mic.micName}</h1>
+              <br />
+              <h3>
+                {this.state.mic.day}s at {this.state.mic.locationName}
+              </h3>
+              <h5>{this.state.mic.address}</h5>
+              <br />
+              <br />
+              <h4>List at {this.state.mic.signUpTime}</h4>
+              <h4>Show at {this.state.mic.startTime}</h4>
+            </Col>
+          </Row>
+          <br />
+          <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
+        </Jumbotron>
       </Container>
     );
   }

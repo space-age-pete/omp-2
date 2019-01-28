@@ -4,12 +4,12 @@ a {
 }
 
 .ECardIMG {
-    height: 100px;
-    width: 100px;
+    height: 150px;
+    width: 150px;
 }
 
 .ECardCard {
     /* width: 70%; */
-    width: 400px;
-    margin-bottom: 20px;
+    width: 600px;
+    margin: 10px;
 }

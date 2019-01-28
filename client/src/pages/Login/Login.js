@@ -19,8 +19,8 @@ import {
 
 export default class Login extends Component {
   state = {
-    username: "josh",
-    password: "josh",
+    username: "",
+    password: "",
     redirectTo: null,
     valid: ""
   };
@@ -80,40 +80,38 @@ export default class Login extends Component {
           <Jumbotron className="formJumbo">
             <Form>
               <FormGroup row>
-                <Label for="username" sm={2}>
+                <Label for="username">
                   Username<span className="asterisk">&nbsp;*</span>
                 </Label>
-                <Col sm={10}>
-                  <Input
-                    className={this.state.valid}
-                    value={this.state.username}
-                    onChange={this.handleInputChange}
-                    type="text"
-                    name="username"
-                    id="username"
-                  />
-                </Col>
+
+                <Input
+                  className={this.state.valid}
+                  value={this.state.username}
+                  onChange={this.handleInputChange}
+                  type="text"
+                  name="username"
+                  id="username"
+                />
               </FormGroup>
               <FormGroup row>
-                <Label for="password" sm={2}>
+                <Label for="password">
                   Password<span className="asterisk">&nbsp;*</span>
                 </Label>
-                <Col sm={10}>
-                  <Input
-                    className={this.state.valid}
-                    value={this.state.password}
-                    onChange={this.handleInputChange}
-                    type="password"
-                    name="password"
-                    id="password"
-                  />
-                  <FormFeedback invalid="true">
-                    Username or Password is incorrect
-                  </FormFeedback>
-                </Col>
+
+                <Input
+                  className={this.state.valid}
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                <FormFeedback invalid="true">
+                  Username or Password is incorrect
+                </FormFeedback>
               </FormGroup>
               <FormGroup check row>
-                <Col sm={{ size: 10, offset: 2 }}>
+                <Col sm={10}>
                   <Button
                     disabled={!(this.state.username && this.state.password)}
                     onClick={this.handleFormSubmit}
