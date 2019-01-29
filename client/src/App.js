@@ -91,7 +91,18 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/mics/:id" component={Detail} />
+            {/* <Route exact path="/mihcs/:id" component={Detail} /> */}
+            <Route
+              exact
+              path="/mics/:id"
+              render={props => (
+                <Detail
+                  {...props}
+                  loggedIn={this.state.loggedIn}
+                  userID={this.state.userID}
+                />
+              )}
+            />
             <Route
               exact
               path="/newmic"

@@ -11,6 +11,7 @@ class Detail extends Component {
   // When this component mounts, grab the mic with the _id of this.props.match.params.id
   // e.g. localhost:3000/mics/599dcb67f0f16317844583fc
   componentDidMount() {
+    console.log("this.props", this.props);
     API.getMic(this.props.match.params.id)
       .then(res => {
         this.setState({ mic: res.data });
@@ -67,7 +68,12 @@ class Detail extends Component {
             </Col>
           </Row>
           <br />
-          <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>
+          {this.props.userID === this.state.mic.userID && (
+            <div>
+              <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>–––
+              <Button>EDIT THIS MIC</Button>
+            </div>
+          )}
         </Jumbotron>
       </Container>
     );
