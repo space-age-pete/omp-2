@@ -18,6 +18,10 @@ export default {
   saveMic: function(micData) {
     return axios.post("/api/mics", micData);
   },
+  // Updates a mic to the database
+  updateMic: function(id, micData) {
+    return axios.put("/api/mics/" + id, micData);
+  },
   //Saves a user
   saveUser: function(userData) {
     return axios.post("/auth", userData);

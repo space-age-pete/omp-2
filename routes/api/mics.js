@@ -36,6 +36,7 @@ router
 router
   .route("/:id")
   .get(micsController.findById)
-  .delete(micsController.remove);
+  .delete(micsController.remove)
+  .put(micsController.update);
 
 module.exports = router;

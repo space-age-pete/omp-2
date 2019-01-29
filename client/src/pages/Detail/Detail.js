@@ -26,10 +26,20 @@ class Detail extends Component {
       API.deleteMic(this.props.match.params.id)
         .then(res => {
           console.log(res.data);
-          this.props.history.push(`/mics`);
+          //this.props.history.push(`/mics`);
         })
         .catch(err => console.log(err));
     }
+  };
+
+  updateMic = event => {
+    event.preventDefault();
+    API.updateMic(this.props.match.params.id, { micName: "Gregg" })
+      .then(res => {
+        console.log(res.data);
+        //this.props.history.push(`/mics`);
+      })
+      .catch(err => console.log(err));
   };
 
   imageTester = um => {
@@ -65,6 +75,7 @@ class Detail extends Component {
               <br />
               <h4>List at {this.state.mic.signUpTime}</h4>
               <h4>Show at {this.state.mic.startTime}</h4>
+              <Button onClick={this.updateMic}>Change Host to "Gregg"</Button>
             </Col>
           </Row>
           <br />
