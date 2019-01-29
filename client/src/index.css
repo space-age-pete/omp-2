@@ -7,7 +7,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; */
   font-family: Arial, Helvetica, sans-serif;
-  background-color: white;
+  /* background-color: white; */
+  background-color: #e9ecef;
   /* background-image: url("http://www.wallpaperdisco.com/images/pattern-tiles/microphone-wallpaper-disco-tom-wahlin@2x.png");
   background-size: 15%; */
 }
@@ -37,11 +38,16 @@ a {
   padding: 64px;
 }
 
-/* .jumbotron {
-  background-color: purple;
-} */
+.jumbotron {
+  background-color:white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+}
 
 .navbar{
   margin-bottom: 50px;
   background-color: rgb(119, 101, 148);
+}
+
+#searchbtn {
+  background-color: rgb(233, 233, 233);
 }

@@ -7,10 +7,14 @@ import {
   Nav,
   NavItem,
   NavLink,
+  Button,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Input,
+  InputGroup,
+  InputGroupAddon
 } from "reactstrap";
 
 export default class Example extends React.Component {
@@ -32,6 +36,16 @@ export default class Example extends React.Component {
       <div>
         <Navbar dark expand="md">
           <NavbarBrand href="/">Open Mic Project</NavbarBrand>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <InputGroup>
+                <Input placeholder="Search..." />
+                <InputGroupAddon addonType="append">
+                  <Button color="light">Q</Button>
+                </InputGroupAddon>
+              </InputGroup>
+            </NavItem>
+          </Nav>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
@@ -54,7 +68,7 @@ export default class Example extends React.Component {
               <NavItem>
                 <NavLink href="/newmic">Add a Mic</NavLink>
               </NavItem>
-              <UncontrolledDropdown nav inNavbar>
+              {/* <UncontrolledDropdown nav inNavbar>
                 <DropdownToggle nav caret>
                   Options
                 </DropdownToggle>
@@ -66,7 +80,7 @@ export default class Example extends React.Component {
                   <DropdownItem divider />
                   <DropdownItem>Reset</DropdownItem>
                 </DropdownMenu>
-              </UncontrolledDropdown>
+              </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
         </Navbar>
