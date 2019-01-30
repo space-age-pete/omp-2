@@ -34,7 +34,23 @@ class Detail extends Component {
 
   updateMic = event => {
     event.preventDefault();
-    API.updateMic(this.props.match.params.id, { micName: "Gregg" })
+    // what I've found out is this:
+    // you can use put to add a field not currently in the instance
+    // but only if that field has since been added to the model
+    API.updateMic(this.props.match.params.id, { comments: "snack" })
+      .then(res => {
+        console.log(res.data);
+        //this.props.history.push(`/mics`);
+      })
+      .catch(err => console.log(err));
+  };
+
+  addToFavorites = event => {
+    event.preventDefault();
+
+    API.addToFavorites(this.props.userID, {
+      favorites: this.props.match.params.id
+    })
       .then(res => {
         console.log(res.data);
         //this.props.history.push(`/mics`);
@@ -75,7 +91,13 @@ class Detail extends Component {
               <br />
               <h4>List at {this.state.mic.signUpTime}</h4>
               <h4>Show at {this.state.mic.startTime}</h4>
-              <Button onClick={this.updateMic}>Change Host to "Gregg"</Button>
+              {/* <Button onClick={this.updateMic}>Add a Snack</Button> */}
+
+              {this.props.userID && (
+                <Button onClick={this.addToFavorites}>
+                  Add to My Favorites
+                </Button>
+              )}
             </Col>
           </Row>
           <br />

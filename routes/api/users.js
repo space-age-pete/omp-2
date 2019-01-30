@@ -1,5 +1,5 @@
 const router = require("express").Router();
-//const micsController = require("../../controllers/micsController");
+const usersController = require("../../controllers/usersController");
 //const multer = require("multer");
 
 // const storage = multer.diskStorage({
@@ -32,7 +32,7 @@ router.route("/");
 
 //.post(micsController.create);
 
-router.route("/:id");
+router.route("/:id").put(usersController.addToFavorites);
 // .get(micsController.findById)
 // .delete(micsController.remove);
 

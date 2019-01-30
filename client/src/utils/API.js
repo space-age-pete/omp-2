@@ -22,6 +22,12 @@ export default {
   updateMic: function(id, micData) {
     return axios.put("/api/mics/" + id, micData);
   },
+  // Updates the favorites array (can't currently undo)
+  addToFavorites: function(id, micData) {
+    return axios.put("/api/users/" + id, micData);
+  },
+
+  //AUTH paths
   //Saves a user
   saveUser: function(userData) {
     return axios.post("/auth", userData);

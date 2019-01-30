@@ -27,7 +27,11 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function(req, res) {
-    db.Mic.findOneAndUpdate({ _id: req.params.id }, req.body)
+    db.Mic.findOneAndUpdate(
+      { _id: req.params.id },
+      { $push: req.body },
+      { new: true }
+    )
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
