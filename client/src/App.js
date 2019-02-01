@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import AddMic from "./pages/AddMic";
+import EditMic from "./pages/EditMic";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
 //import NoMatch from "./pages/NoMatch";
@@ -97,6 +98,17 @@ class App extends Component {
               path="/mics/:id"
               render={props => (
                 <Detail
+                  {...props}
+                  loggedIn={this.state.loggedIn}
+                  userID={this.state.userID}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/editmic/:id"
+              render={props => (
+                <EditMic
                   {...props}
                   loggedIn={this.state.loggedIn}
                   userID={this.state.userID}

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import { Container, Row, Col, Button, Jumbotron } from "reactstrap";
 import "./Detail.css";
@@ -104,7 +104,11 @@ class Detail extends Component {
           {this.props.userID === this.state.mic.userID && (
             <div>
               <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>–––
-              <Button>EDIT THIS MIC</Button>
+              <Button>
+                <Link to={"/editmic/" + this.props.match.params.id}>
+                  EDIT THIS MIC
+                </Link>
+              </Button>
             </div>
           )}
         </Jumbotron>
