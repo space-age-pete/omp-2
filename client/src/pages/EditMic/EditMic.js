@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
+import MicForm from "../../components/MicForm";
 import {
   Col,
   Button,
@@ -19,7 +20,7 @@ export default class EditMic extends Component {
     micName: "",
     locationName: "",
     address: "",
-    signUpTime: "",
+    signUpTime: "21:30",
     startTime: "",
     day: "",
     website: "",
@@ -29,6 +30,32 @@ export default class EditMic extends Component {
     micImage: null,
     loggedIn: false,
     redirectTo: null
+  };
+
+  componentDidMount() {
+    console.log("CDM props:", this.props);
+    console.log(this.timeUnConvert("9:30 PM"));
+    this.timeUnConvert("12:00 AM");
+    //setInterval(() => console.log("CDM props:", this.props), 50);
+    //this.setState({ loggedIn: this.props.loggedIn });
+    this.loadMic();
+  }
+
+  loadMic = () => {
+    API.getMic(this.props.match.params.id)
+      .then(res => {
+        console.log("res.data: ", res.data);
+        let { comments, date, userID, __v, _id, ...rest } = res.data;
+        console.log("rest: ", rest);
+        // let { micName, locationName } = {
+        //   micName: "test1",
+        //   locationName: "test2"
+        // };
+        rest.mic = res.data;
+        this.setState(rest, () => console.log("state", this.state));
+        console.log(res.data);
+      })
+      .catch(err => console.log(err));
   };
 
   dayConvert = arg => {
@@ -54,28 +81,13 @@ export default class EditMic extends Component {
     else return `${arg} AM`;
   };
 
-  componentDidMount() {
-    console.log("CDM props:", this.props);
-    //setInterval(() => console.log("CDM props:", this.props), 50);
-    //this.setState({ loggedIn: this.props.loggedIn });
-    this.loadMic();
-  }
-
-  loadMic = () => {
-    API.getMic(this.props.match.params.id)
-      .then(res => {
-        console.log("res.data: ", res.data);
-        let { comments, date, userID, __v, _id, ...rest } = res.data;
-        console.log("rest: ", rest);
-        // let { micName, locationName } = {
-        //   micName: "test1",
-        //   locationName: "test2"
-        // };
-        rest.mic = res.data;
-        this.setState(rest, () => console.log("state", this.state));
-        console.log(res.data);
-      })
-      .catch(err => console.log(err));
+  timeUnConvert = arg => {
+    let c = arg.indexOf(":");
+    let firstBit = +arg.substring(0, c);
+    let secondBit = arg.substring(c, c + 3);
+    let thirdBit = arg.substring(c + 4);
+    //console.log(firstBit, secondBit, thirdBit);
+    if (thirdBit === "PM") return `${firstBit + 12}${secondBit}`;
   };
 
   handleInputChange = event => {
@@ -84,11 +96,6 @@ export default class EditMic extends Component {
       [name]: value
     });
     console.log("signup time", this.timeConvert(this.state.signUpTime));
-  };
-
-  fileSelectedHandler = event => {
-    console.log("file", event.target.files);
-    this.setState({ micImage: event.target.files[0] });
   };
 
   handleFormSubmit = event => {
@@ -133,178 +140,9 @@ export default class EditMic extends Component {
       //return <div>somethin went rong</div>;
     } else {
       return (
-        <Container>
-          <Jumbotron className="formJumbo">
-            {/* {this.props.loggedIn && <div>we logged in</div>} */}
-            <Form>
-              <FormGroup>
-                <Label for="micName">
-                  Event Name<span className="asterisk">&nbsp;*</span>
-                </Label>
-
-                <Input
-                  value={this.state.micName}
-                  onChange={this.handleInputChange}
-                  type="text"
-                  name="micName"
-                  id="micName"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="locationName">
-                  Location Name<span className="asterisk">&nbsp;*</span>
-                </Label>
-
-                <Input
-                  value={this.state.locationName}
-                  onChange={this.handleInputChange}
-                  type="text"
-                  name="locationName"
-                  id="locationName"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="address">
-                  Address<span className="asterisk">&nbsp;*</span>
-                </Label>
-
-                <Input
-                  value={this.state.address}
-                  onChange={this.handleInputChange}
-                  type="text"
-                  name="address"
-                  id="address"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="day">
-                  Day of Week<span className="asterisk">&nbsp;*</span>
-                </Label>
-
-                <Input
-                  value={this.state.day}
-                  onChange={this.handleInputChange}
-                  type="select"
-                  name="day"
-                  id="day"
-                >
-                  <option />
-                  {/* <option disabled>Select</option> */}
-                  <option>Sunday</option>
-                  <option>Monday</option>
-                  <option>Tuesday</option>
-                  <option>Wednesday</option>
-                  <option>Thursday</option>
-                  <option>Friday</option>
-                  <option>Saturday</option>
-                </Input>
-              </FormGroup>
-
-              <Row form>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label for="signUpTime">
-                      Sign Up Time<span className="asterisk">&nbsp;*</span>
-                    </Label>
-
-                    <Input
-                      value={this.state.signUpTime}
-                      onChange={this.handleInputChange}
-                      type="time"
-                      name="signUpTime"
-                      id="signUpTime"
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label for="startTime">
-                      Start Time<span className="asterisk">&nbsp;*</span>
-                    </Label>
-
-                    <Input
-                      value={this.state.startTime}
-                      onChange={this.handleInputChange}
-                      type="time"
-                      name="startTime"
-                      id="startTime"
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
-
-              <Row form>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label for="slotLength">Slot Length (minutes)</Label>
-                    <Input
-                      value={this.state.slotLength}
-                      onChange={this.handleInputChange}
-                      type="number"
-                      name="slotLength"
-                      id="slotLength"
-                    />
-                  </FormGroup>
-                </Col>
-                <Col md={6}>
-                  <FormGroup>
-                    <Label for="host">Host</Label>
-                    <Input
-                      value={this.state.host}
-                      onChange={this.handleInputChange}
-                      type="text"
-                      name="host"
-                      id="host"
-                    />
-                  </FormGroup>
-                </Col>
-              </Row>
-              <FormGroup>
-                <Label for="website">Website</Label>
-
-                <Input
-                  value={this.state.website}
-                  onChange={this.handleInputChange}
-                  type="text"
-                  name="website"
-                  id="website"
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleText">Additional Info</Label>
-
-                <Input
-                  value={this.state.additionalInfo}
-                  onChange={this.handleInputChange}
-                  type="textarea"
-                  name="additionalInfo"
-                  id="additionalInfo"
-                />
-              </FormGroup>
-              <FormGroup check>
-                <Col>
-                  <Button
-                    disabled={
-                      !(
-                        this.state.micName &&
-                        this.state.locationName &&
-                        this.state.address &&
-                        this.state.signUpTime &&
-                        this.state.startTime &&
-                        this.state.day &&
-                        this.props.loggedIn
-                      )
-                    }
-                    onClick={this.handleFormSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-              </FormGroup>
-              {/* <Button onClick={() => console.log(this.state, this.props)} /> */}
-            </Form>
-          </Jumbotron>
-        </Container>
+        <div>
+          <MicForm />
+        </div>
       );
     }
   }
