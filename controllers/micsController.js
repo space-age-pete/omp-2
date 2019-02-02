@@ -29,7 +29,8 @@ module.exports = {
   update: function(req, res) {
     db.Mic.findOneAndUpdate(
       { _id: req.params.id },
-      { $push: req.body },
+      // { $push: req.body },
+      req.body,
       { new: true }
     )
       .then(dbModel => res.json(dbModel))

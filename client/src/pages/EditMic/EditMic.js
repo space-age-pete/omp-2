@@ -2,25 +2,13 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 import MicForm from "../../components/MicForm";
-import {
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  FormText,
-  Label,
-  Input,
-  Row,
-  Container,
-  Jumbotron
-} from "reactstrap";
 
 export default class EditMic extends Component {
   state = {
     micName: "",
     locationName: "",
     address: "",
-    signUpTime: "21:30",
+    signUpTime: "",
     startTime: "",
     day: "",
     website: "",
@@ -34,10 +22,6 @@ export default class EditMic extends Component {
 
   componentDidMount() {
     console.log("CDM props:", this.props);
-    console.log("9:30 PM", this.timeUnConvert("9:30 PM"));
-    console.log("12:00 AM", this.timeUnConvert("12:00 AM"));
-    console.log("11:00 AM", this.timeUnConvert("11:00 AM"));
-    console.log("9:30 AM", this.timeUnConvert("9:30 AM"));
     //setInterval(() => console.log("CDM props:", this.props), 50);
     //this.setState({ loggedIn: this.props.loggedIn });
     this.loadMic();
@@ -46,18 +30,14 @@ export default class EditMic extends Component {
   loadMic = () => {
     API.getMic(this.props.match.params.id)
       .then(res => {
-        console.log("res.data: ", res.data);
+        //console.log("res.data: ", res.data);
         let { comments, date, userID, __v, _id, ...rest } = res.data;
-        console.log("rest: ", rest);
-        // let { micName, locationName } = {
-        //   micName: "test1",
-        //   locationName: "test2"
-        // };
+        //console.log("rest: ", rest);
         rest.mic = res.data;
         rest.signUpTime = this.timeUnConvert(rest.signUpTime);
         rest.startTime = this.timeUnConvert(rest.startTime);
         this.setState(rest, () => console.log("state", this.state));
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch(err => console.log(err));
   };
@@ -104,42 +84,40 @@ export default class EditMic extends Component {
     this.setState({
       [name]: value
     });
-    console.log(this.state);
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
+    console.log("handleForm state: ", this.state);
     //cleaner way to do this with destructuring or w/e?
-    // if (
-    //   this.state.micName &&
-    //   this.state.locationName &&
-    //   this.state.address &&
-    //   this.state.signUpTime &&
-    //   this.state.startTime &&
-    //   this.state.day &&
-    //   this.props.userID
-    // ) {
+    if (
+      this.state.micName &&
+      this.state.locationName &&
+      this.state.address &&
+      this.state.signUpTime &&
+      this.state.startTime &&
+      this.state.day &&
+      this.props.userID
+    ) {
+      API.updateMic(this.props.match.params.id, {
+        micName: this.state.micName,
+        locationName: this.state.locationName,
+        address: this.state.address,
+        signUpTime: this.timeConvert(this.state.signUpTime),
+        startTime: this.timeConvert(this.state.startTime),
+        day: this.state.day,
+        host: this.state.host,
+        slotLength: this.state.slotLength,
+        micImage: this.state.micImage
+      })
+        .catch(err => console.log(err))
+        .then(res => {
+          console.log("res:", res.data.id);
+          this.setState({ redirectTo: `/mics/${res.data._id}` });
+        });
 
-    //   // API.saveMic({
-    //   //   micName: this.state.micName,
-    //   //   locationName: this.state.locationName,
-    //   //   address: this.state.address,
-    //   //   signUpTime: this.state.signUpTime,
-    //   //   startTime: this.state.startTime,
-    //   //   day: this.state.day,
-    //   //   host: this.state.host,
-    //   //   slotLength: this.state.slotLength,
-    //   //   micImage: this.state.micImage
-    //   // })
-    //   API.saveMic(fd)
-    //     .catch(err => console.log(err))
-    //     .then(res => {
-    //       console.log("res:", res.data.id);
-    //       this.setState({ redirectTo: `/mics/${res.data._id}` });
-    //     });
-
-    //above redirect could be cleaner
-    //}
+      //above redirect could be cleaner
+    }
   };
 
   render() {
@@ -153,6 +131,7 @@ export default class EditMic extends Component {
           <MicForm
             micInfo={this.state}
             handleInputChange={this.handleInputChange}
+            handleFormSubmit={this.handleFormSubmit}
           />
           <button onClick={() => console.log(this.state)}>state</button>
         </div>

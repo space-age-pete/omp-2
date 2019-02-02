@@ -214,16 +214,17 @@ export default class MicForm extends React.Component {
                   <Button
                     disabled={
                       !(
-                        this.state.micName &&
-                        this.state.locationName &&
-                        this.state.address &&
-                        this.state.signUpTime &&
-                        this.state.startTime &&
-                        this.state.day &&
-                        this.props.loggedIn
+                        this.props.micInfo.micName &&
+                        this.props.micInfo.locationName &&
+                        this.props.micInfo.address &&
+                        this.props.micInfo.signUpTime &&
+                        this.props.micInfo.startTime &&
+                        this.props.micInfo.day
                       )
+                      // &&
+                      // this.props.loggedIn
                     }
-                    onClick={this.handleFormSubmit}
+                    onClick={this.props.handleFormSubmit}
                   >
                     Submit
                   </Button>
