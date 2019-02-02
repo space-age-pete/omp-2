@@ -30,13 +30,13 @@ export default class MicForm extends React.Component {
     redirectTo: null
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
-    //console.log("signup time", this.timeConvert(this.state.signUpTime));
-  };
+  // handleInputChange = event => {
+  //   const { name, value } = event.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  //   //console.log("signup time", this.timeConvert(this.state.signUpTime));
+  // };
 
   render() {
     // let logged = this.props.loggedIn;
@@ -55,8 +55,8 @@ export default class MicForm extends React.Component {
                 </Label>
 
                 <Input
-                  value={this.state.micName}
-                  onChange={this.handleInputChange}
+                  value={this.props.micInfo.micName}
+                  onChange={this.props.handleInputChange}
                   type="text"
                   name="micName"
                   id="micName"
@@ -68,8 +68,8 @@ export default class MicForm extends React.Component {
                 </Label>
 
                 <Input
-                  value={this.state.locationName}
-                  onChange={this.handleInputChange}
+                  value={this.props.micInfo.locationName}
+                  onChange={this.props.handleInputChange}
                   type="text"
                   name="locationName"
                   id="locationName"
@@ -81,8 +81,8 @@ export default class MicForm extends React.Component {
                 </Label>
 
                 <Input
-                  value={this.state.address}
-                  onChange={this.handleInputChange}
+                  value={this.props.micInfo.address}
+                  onChange={this.props.handleInputChange}
                   type="text"
                   name="address"
                   id="address"
@@ -94,8 +94,8 @@ export default class MicForm extends React.Component {
                 </Label>
 
                 <Input
-                  value={this.state.day}
-                  onChange={this.handleInputChange}
+                  value={this.props.micInfo.day}
+                  onChange={this.props.handleInputChange}
                   type="select"
                   name="day"
                   id="day"
@@ -120,8 +120,8 @@ export default class MicForm extends React.Component {
                     </Label>
 
                     <Input
-                      value={this.state.signUpTime}
-                      onChange={this.handleInputChange}
+                      value={this.props.micInfo.signUpTime}
+                      onChange={this.props.handleInputChange}
                       type="time"
                       name="signUpTime"
                       id="signUpTime"
@@ -135,8 +135,8 @@ export default class MicForm extends React.Component {
                     </Label>
 
                     <Input
-                      value={this.state.startTime}
-                      onChange={this.handleInputChange}
+                      value={this.props.micInfo.startTime}
+                      onChange={this.props.handleInputChange}
                       type="time"
                       name="startTime"
                       id="startTime"
@@ -150,8 +150,8 @@ export default class MicForm extends React.Component {
                   <FormGroup>
                     <Label for="slotLength">Slot Length (minutes)</Label>
                     <Input
-                      value={this.state.slotLength}
-                      onChange={this.handleInputChange}
+                      value={this.props.micInfo.slotLength}
+                      onChange={this.props.handleInputChange}
                       type="number"
                       name="slotLength"
                       id="slotLength"
@@ -162,8 +162,8 @@ export default class MicForm extends React.Component {
                   <FormGroup>
                     <Label for="host">Host</Label>
                     <Input
-                      value={this.state.host}
-                      onChange={this.handleInputChange}
+                      value={this.props.micInfo.host}
+                      onChange={this.props.handleInputChange}
                       type="text"
                       name="host"
                       id="host"
@@ -175,8 +175,8 @@ export default class MicForm extends React.Component {
                 <Label for="website">Website</Label>
 
                 <Input
-                  value={this.state.website}
-                  onChange={this.handleInputChange}
+                  value={this.props.micInfo.website}
+                  onChange={this.props.handleInputChange}
                   type="text"
                   name="website"
                   id="website"
@@ -186,8 +186,8 @@ export default class MicForm extends React.Component {
                 <Label for="exampleText">Additional Info</Label>
 
                 <Input
-                  value={this.state.additionalInfo}
-                  onChange={this.handleInputChange}
+                  value={this.props.micInfo.additionalInfo}
+                  onChange={this.props.handleInputChange}
                   type="textarea"
                   name="additionalInfo"
                   id="additionalInfo"

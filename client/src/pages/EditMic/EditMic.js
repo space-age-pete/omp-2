@@ -34,8 +34,10 @@ export default class EditMic extends Component {
 
   componentDidMount() {
     console.log("CDM props:", this.props);
-    console.log(this.timeUnConvert("9:30 PM"));
-    this.timeUnConvert("12:00 AM");
+    console.log("9:30 PM", this.timeUnConvert("9:30 PM"));
+    console.log("12:00 AM", this.timeUnConvert("12:00 AM"));
+    console.log("11:00 AM", this.timeUnConvert("11:00 AM"));
+    console.log("9:30 AM", this.timeUnConvert("9:30 AM"));
     //setInterval(() => console.log("CDM props:", this.props), 50);
     //this.setState({ loggedIn: this.props.loggedIn });
     this.loadMic();
@@ -52,6 +54,8 @@ export default class EditMic extends Component {
         //   locationName: "test2"
         // };
         rest.mic = res.data;
+        rest.signUpTime = this.timeUnConvert(rest.signUpTime);
+        rest.startTime = this.timeUnConvert(rest.startTime);
         this.setState(rest, () => console.log("state", this.state));
         console.log(res.data);
       })
@@ -87,7 +91,12 @@ export default class EditMic extends Component {
     let secondBit = arg.substring(c, c + 3);
     let thirdBit = arg.substring(c + 4);
     //console.log(firstBit, secondBit, thirdBit);
-    if (thirdBit === "PM") return `${firstBit + 12}${secondBit}`;
+    //if (firstBit === 12 && thirdBit === "PM") return `${firstBit + 12}${secondBit}`;
+    if (thirdBit === "PM" && firstBit < 12)
+      return `${firstBit + 12}${secondBit}`;
+    else if (thirdBit === "AM" && firstBit === 12) return `00${secondBit}`;
+    else if (firstBit < 10) return `0${firstBit}${secondBit}`;
+    else return `${firstBit}${secondBit}`;
   };
 
   handleInputChange = event => {
@@ -95,7 +104,7 @@ export default class EditMic extends Component {
     this.setState({
       [name]: value
     });
-    console.log("signup time", this.timeConvert(this.state.signUpTime));
+    console.log(this.state);
   };
 
   handleFormSubmit = event => {
@@ -141,7 +150,11 @@ export default class EditMic extends Component {
     } else {
       return (
         <div>
-          <MicForm />
+          <MicForm
+            micInfo={this.state}
+            handleInputChange={this.handleInputChange}
+          />
+          <button onClick={() => console.log(this.state)}>state</button>
         </div>
       );
     }
