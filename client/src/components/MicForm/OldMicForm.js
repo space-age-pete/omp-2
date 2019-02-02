@@ -50,17 +50,45 @@ export default class MicForm extends React.Component {
           <Jumbotron className="formJumbo">
             {/* {this.props.loggedIn && <div>we logged in</div>} */}
             <Form>
-              <MicFormInput
-                field="micName"
-                label="Event Name"
-                {...this.props}
-              />
-              <MicFormInput
-                field="locationName"
-                label="Location Name"
-                {...this.props}
-              />
-              <MicFormInput field="address" label="Address" {...this.props} />
+              <FormGroup>
+                <Label for="micName">
+                  Event Name<span className="asterisk">&nbsp;*</span>
+                </Label>
+
+                <Input
+                  value={this.props.micInfo.micName}
+                  onChange={this.props.handleInputChange}
+                  type="text"
+                  name="micName"
+                  id="micName"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="locationName">
+                  Location Name<span className="asterisk">&nbsp;*</span>
+                </Label>
+
+                <Input
+                  value={this.props.micInfo.locationName}
+                  onChange={this.props.handleInputChange}
+                  type="text"
+                  name="locationName"
+                  id="locationName"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="address">
+                  Address<span className="asterisk">&nbsp;*</span>
+                </Label>
+
+                <Input
+                  value={this.props.micInfo.address}
+                  onChange={this.props.handleInputChange}
+                  type="text"
+                  name="address"
+                  id="address"
+                />
+              </FormGroup>
               <FormGroup>
                 <Label for="day">
                   Day of Week<span className="asterisk">&nbsp;*</span>
@@ -132,10 +160,30 @@ export default class MicForm extends React.Component {
                   </FormGroup>
                 </Col>
                 <Col md={6}>
+                  {/* <FormGroup>
+                    <Label for="host">Host</Label>
+                    <Input
+                      value={this.props.micInfo.host}
+                      onChange={this.props.handleInputChange}
+                      type="text"
+                      name="host"
+                      id="host"
+                    />
+                  </FormGroup> */}
                   <MicFormInput field="host" label="Host" {...this.props} />
                 </Col>
               </Row>
-              <MicFormInput field="website" label="Website" {...this.props} />
+              <FormGroup>
+                <Label for="website">Website</Label>
+
+                <Input
+                  value={this.props.micInfo.website}
+                  onChange={this.props.handleInputChange}
+                  type="text"
+                  name="website"
+                  id="website"
+                />
+              </FormGroup>
               <FormGroup>
                 <Label for="exampleText">Additional Info</Label>
 
