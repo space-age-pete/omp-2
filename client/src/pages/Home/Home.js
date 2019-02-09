@@ -45,38 +45,24 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        {/* <Form row>
-          <FormGroup row>
-            <Label for="day" sm={2}>
-              Day of Week
-            </Label>
-
-            <Col sm={8}>
-              <Input
-                value={this.state.day}
-                onChange={this.handleInputChange}
-                type="select"
-                name="day"
-                id="day"
-              >
-                <option />
-                <option>Sunday</option>
-                <option>Monday</option>
-                <option>Tuesday</option>
-                <option>Wednesday</option>
-                <option>Thursday</option>
-                <option>Friday</option>
-                <option>Saturday</option>
-              </Input>
-            </Col>
-            <Col sm="2">
-              <Button onClick={() => this.loadMics(this.state.day)}>
-                Submit
-              </Button>
-            </Col>
-          </FormGroup>
-        </Form> */}
         <Row>
+        <Col id="maincol" xs="3">
+            <Jumbotron>
+              <h5 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h5>
+              <h5 onClick={() => this.loadMics("day", "Monday")}>Monday</h5>
+              <h5 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h5>
+              <h5 onClick={() => this.loadMics("day", "Wednesday")}>
+                Wednesday
+              </h5>
+              <h5 onClick={() => this.loadMics("day", "Thursday")}>Thursday</h5>
+              <h5 onClick={() => this.loadMics("day", "Friday")}>Friday</h5>
+              <h5 onClick={() => this.loadMics("day", "Saturday")}>Saturday</h5>
+              <h5 onClick={() => this.loadMics("", "")}>All Mics</h5>
+              <h5 onClick={() => this.loadMics("userID", this.props.userID)}>
+                My Mics
+              </h5>
+            </Jumbotron>
+          </Col>
           {/* <Col id="maincol" xs="9"> */}
           <Col xs="9">
             <Jumbotron>
@@ -98,23 +84,7 @@ class Home extends Component {
               )}
             </Jumbotron>
           </Col>
-          <Col id="maincol" xs="3">
-            <Jumbotron>
-              <h5 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h5>
-              <h5 onClick={() => this.loadMics("day", "Monday")}>Monday</h5>
-              <h5 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h5>
-              <h5 onClick={() => this.loadMics("day", "Wednesday")}>
-                Wednesday
-              </h5>
-              <h5 onClick={() => this.loadMics("day", "Thursday")}>Thursday</h5>
-              <h5 onClick={() => this.loadMics("day", "Friday")}>Friday</h5>
-              <h5 onClick={() => this.loadMics("day", "Saturday")}>Saturday</h5>
-              <h5 onClick={() => this.loadMics("", "")}>All Mics</h5>
-              <h5 onClick={() => this.loadMics("userID", this.props.userID)}>
-                My Mics
-              </h5>
-            </Jumbotron>
-          </Col>
+          
         </Row>
       </Container>
     );

@@ -14,7 +14,8 @@ import {
   DropdownItem,
   Input,
   InputGroup,
-  InputGroupAddon
+  InputGroupAddon,
+  Container
 } from "reactstrap";
 
 export default class Example extends React.Component {
@@ -35,6 +36,7 @@ export default class Example extends React.Component {
     return (
       <div>
         <Navbar dark expand="md">
+          {/* <Container> */}
           <NavbarBrand href="/">Open Mic Project</NavbarBrand>
           <Nav className="ml-auto" navbar>
             <NavItem>
@@ -69,20 +71,21 @@ export default class Example extends React.Component {
                 <NavLink href="/newmic">Add a Mic</NavLink>
               </NavItem>
               {/* <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
-                  Options
-                </DropdownToggle>
-                <DropdownMenu right>
-                  <DropdownItem>My Profile</DropdownItem>
-                  <DropdownItem onClick={this.props.logout}>
-                    Log Out
-                  </DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>Reset</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown> */}
+                  <DropdownToggle nav caret>
+                    Options
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>My Profile</DropdownItem>
+                    <DropdownItem onClick={this.props.logout}>
+                      Log Out
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>Reset</DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown> */}
             </Nav>
           </Collapse>
+          {/* </Container> */}
         </Navbar>
       </div>
     );
