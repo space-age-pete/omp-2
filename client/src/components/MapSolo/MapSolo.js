@@ -8,7 +8,7 @@ import fighters from "../../utils/fighters.json";
 class MapSolo extends Component {
   state = {
     venues: [],
-    fighters: [],
+    fighters: fighters,
     refs: [],
     prevCurrLatLng: {
       lat: null,
@@ -100,8 +100,9 @@ class MapSolo extends Component {
   //   };
 
   getFighters = () => {
+    console.log("this.fighters: ", fighters);
     this.setState({
-      fighters: this.fighters,
+      fighters: fighters,
       fightersAPIHit: true
     });
     this.triggerInitMap();
@@ -155,8 +156,7 @@ class MapSolo extends Component {
 
       // Create A Marker
       var icon = {
-        url:
-          "http://icons.iconarchive.com/icons/google/noto-emoji-activities/256/52746-boxing-glove-icon.png", // url
+        url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
         scaledSize: new window.google.maps.Size(50, 50), // scaled size
         origin: new window.google.maps.Point(0, 0), // origin
         anchor: new window.google.maps.Point(0, 0) // anchor

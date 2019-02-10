@@ -6,6 +6,7 @@ import AddMic from "./pages/AddMic";
 import EditMic from "./pages/EditMic";
 import SignUp from "./pages/SignUp";
 import Login from "./pages/Login";
+import MapSolo from "./components/MapSolo";
 //import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 import API from "../src/utils/API";
@@ -126,6 +127,7 @@ class App extends Component {
               )}
             />
             <Route exact path="/signup" component={SignUp} />
+            <Route exact path="/maptest" component={MapSolo} />
             <Route
               exact
               path="/login"
