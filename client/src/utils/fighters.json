@@ -1,0 +1,141 @@
+[
+    {
+      "name": "Harrison Drake",
+      "level": 4,
+      "bio":
+        "Earned praised for my work implementing g.i. joes in Washington, DC. Spent childhood working on trumpets in the government sector. Spent childhood donating dogmas in Mexico. Spent a weekend investing in electric trains in Nigeria. Have a strong interest in deploying gravy worldwide. Spent several years training the elderly in New York, NY.",
+      "age": 34,
+      "gender": "male",
+      "matchesWon": 5,
+      "matchesLost": 18,
+     
+      "type": "fighter",
+      "lat": 41.9272207,
+      "lng": -87.70233584,
+      "phone": "773-243-1500"
+    },
+    {
+      "name": "Emily Frankfurter",
+      "level": 9,
+      "bio":
+        "Gifted in working on banjos for farmers. Spent two years testing the market for sausage in the financial sector. Was quite successful at lecturing about fatback in Naples, FL. Spent two years writing about teddy bears in Fort Walton Beach, FL. Spent 2001-2005 analyzing toy monkeys in Edison, NJ. Spent 2002-2008 promoting sausage for fun and profit.",
+      "age": 19,
+      "gender": "female",
+      "matchesWon": 7,
+      "matchesLost": 2,
+      
+      "type": "fighter",
+      "lat": 41.92875326,
+      "lng": -87.68448305,
+      "phone": "312-555-1111"
+    },
+    {
+      "name": "Mark FamilyHurter",
+      "level": 3,
+      "bio":
+        "Developed several new methods for donating accordians in Ohio. Was quite successful at short selling clip-on ties in Tampa, FL. Set new standards for importing bassoons in Prescott, AZ. Spent 2002-2009 getting my feet wet with toy planes in Cuba. Once had a dream of donating circus clowns for the government. Won several awards for importing wooden trains in Cuba.",
+      "age": 65,
+      "gender": "male",
+      "matchesWon": 87,
+      "matchesLost": 2,
+      
+      "type": "fighter",
+      "lat": 41.92798698,
+      "lng": -87.66663027,
+      "phone": "773-242-1536"
+    },
+    {
+      "name": "Lipswitch McGee",
+      "level": 10,
+      "bio":
+        "What gets me going now is short selling toy elephants in Atlantic City, NJ. Have a strong interest in importing Roombas on Wall Street. Lead a team lecturing about methane in Salisbury, MD. Once had a dream of testing the market for dust in the financial sector. Spent a year exporting hugs in Salisbury, MD. Spent several months consulting about bassoons in Ohio.",
+      "age": 43,
+      "gender": "male",
+      "matchesWon": 34,
+      "matchesLost": 21,
+      
+      "type": "fighter",
+      "lat": 41.93794786,
+      "lng": -87.68654299,
+      "phone": "312-456-7890"
+    },
+    
+    
+    {
+      "name": "Adam Kravitz",
+      "level": 9,
+      "bio":
+        "Practiced in the art of creating marketing channels for Mr. Potato Heads in Washington, DC. Spent 2002-2009 marketing puppets in Jacksonville, FL. Spent 2002-2008 marketing cigarettes in Africa. Spent 2002-2007 exporting pubic lice in Ocean City, NJ. Spent high school summers marketing banjos in Fort Walton Beach, FL. Spent the 80's testing the market for tobacco for no pay.",
+      "age": 29,
+      "gender": "male",
+      "matchesWon": 13,
+      "matchesLost": 2,
+      
+      "type": "fighter",
+      "lat": 41.90857157,
+      "lng": -87.65598726,
+      "phone": "212-445-6758"
+    },
+
+
+    {
+      "name": "Michael Dubriak",
+      "level": 6,
+      "bio":
+        "Spent high school summers selling cannibalism in Deltona, FL. Spent two years marketing pubic lice in Edison, NJ. Spent a year marketing jigsaw puzzles in Suffolk, NY. Spoke at an international conference about working on ice cream in Deltona, FL. Spent college summers buying and selling puppets in Ocean City, NJ. Spent childhood developing bathtub gin in Miami, FL.",
+      "age": 43,
+      "gender": "male",
+      "matchesWon": 35,
+      "matchesLost": 5,
+      
+      "type": "fighter",
+      "lat": 41.89783947,
+      "lng": -87.66937685,
+      "phone": "312-576-9981"
+    },
+    {
+      "name": "Jefferson Tokamak",
+      "level": 11,
+      "bio":
+        "Once had a dream of promoting glue in Suffolk, NY. Gifted in licensing human hair in New York, NY. Spoke at an international conference about licensing shaving cream for the underprivileged. Spent a weekend training electric trains in Hanford, CA. Spent 2002-2009 lecturing about birdhouses in Salisbury, MD. Spent 2002-2009 supervising the production of dust in Pensacola, FL.",
+      "age": 33,
+      "gender": "male",
+      "matchesWon": 21,
+      "matchesLost": 9,
+     
+      "type": "fighter",
+      "lat": 41.89272831,
+      "lng": -87.61925173,
+      "phone": "312-576-9459"
+    },
+    {
+      "name": "Ashley Montgomery",
+      "level": 11,
+      "bio":
+        "Spent 2001-2004 marketing junk food in Atlantic City, NJ. Crossed the country researching yogurt in Prescott, AZ. Once had a dream of investing in Slinkies in Naples, FL. Spent 2001-2006 developing Uno in Naples, FL. Won several awards for exporting basketballs in Libya. Set new standards for writing about tattoos in Jacksonville, FL.",
+      "age": 44,
+      "gender": "female",
+      "matchesWon": 18,
+      "matchesLost": 12,
+     
+      "type": "fighter",
+      "lat": 41.88020424,
+      "lng": -87.64568758,
+      "phone": "312-576-9219"
+    },
+    {
+      "name": "Henry Juicebox",
+      "level": 6,
+      "bio":
+        "My current pet project is building licorice in Atlantic City, NJ. Had a brief career buying and selling Roombas in Phoenix, AZ. Lead a team merchandising sausage worldwide. In 2009 I was building velcro for farmers. Managed a small team building bacon in Atlantic City, NJ. Earned praise for marketing gravy in Hanford, CA.",
+      "age": 41,
+      "gender": "male",
+      "matchesWon": 11,
+      "matchesLost": 20,
+      
+      "type": "fighter",
+      "lat": 41.89170603,
+      "lng": -87.61478853,
+      "phone": "311-576-9989"
+    }
+  ]
