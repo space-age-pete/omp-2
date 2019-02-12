@@ -21,6 +21,7 @@ class MapSolo extends Component {
     venuesAPIHit: true,
     fightersAPIHit: false,
     refsAPIHit: true,
+    micsAPIHit: false,
     areTilesLoaded: false,
     mapLoaded: false
   };
@@ -62,6 +63,7 @@ class MapSolo extends Component {
     window.initMap = this.initMap;
 
     this.getFighters();
+    this.getMics();
     //this.getRefs();
   }
 
@@ -92,6 +94,23 @@ class MapSolo extends Component {
     this.triggerInitMap();
   };
 
+  getMics = () => {
+    API.getMics()
+      .then(response => {
+        console.log("getMics response", response);
+        this.setState(
+          {
+            mics: response.data,
+            micsAPIHit: true
+          },
+          this.triggerInitMap
+        );
+      })
+      .catch(error => {
+        console.log("ERROR!! " + error);
+      });
+  };
+
   initMap = () => {
     console.log(this.state.userCurrLatLng);
     if (!this.state.userCurrLatLng.lat || !this.state.userCurrLatLng.lng) {
@@ -107,7 +126,7 @@ class MapSolo extends Component {
 
     var geocoder = new window.google.maps.Geocoder();
 
-    this.geocodeAddress(geocoder, map);
+    //this.geocodeAddress(geocoder, map, "4607 N Sheridan Rd Chicago IL 60640");
 
     // Add listener for tilesloaded and update our areTilesloaded state to remove spinner
     map.addListener("tilesloaded", () => {
@@ -155,6 +174,69 @@ class MapSolo extends Component {
         infowindow.open(map, markerFight);
       });
     });
+
+    // Display Dynamic Markers for Fighters
+    this.state.mics.map(mic => {
+      var contentString = `<div id="content"><div id="siteNotice"></div><img src="http://icons.iconarchive.com/icons/google/noto-emoji-activities/256/52746-boxing-glove-icon.png" class="fighterIcon" /><h2 id="firstHeading" class="firstHeading">${
+        mic.micName
+      }</h2><h6>At: ${mic.locationName}</h6><h6>${
+        mic.address
+      }</h6><div id="bodyContent"><img src=${
+        mic.img
+      } class="fighterImg" /></div></div>`;
+
+      // Create A Marker
+      var icon = {
+        url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
+        scaledSize: new window.google.maps.Size(50, 50), // scaled size
+        origin: new window.google.maps.Point(0, 0), // origin
+        anchor: new window.google.maps.Point(0, 0) // anchor
+      };
+
+      geocoder.geocode({ address: mic.address }, function(results, status) {
+        if (status === "OK") {
+          var markerFight = new window.google.maps.Marker({
+            position: results[0].geometry.location,
+            map: map,
+            title: mic.micName,
+            icon: icon
+          });
+
+          // Click on A Marker!
+          markerFight.addListener("click", function() {
+            // Change the content
+            infowindow.setContent(contentString);
+
+            // Open An InfoWindow
+            infowindow.open(map, markerFight);
+          });
+        } else {
+          alert(
+            `Geocode for ${
+              mic.address
+            }was not successful for the following reason: ${status}`
+          );
+        }
+      });
+
+      // var markerFight = new window.google.maps.Marker({
+      //   position: this.geocodeAddress(geocoder, map, mic.address),
+      //   map: map,
+      //   title: mic.micName,
+      //   icon: icon
+      // });
+
+      // console.log("Marker: ", markerFight);
+
+      // // Click on A Marker!
+      // markerFight.addListener("click", function() {
+      //   // Change the content
+      //   infowindow.setContent(contentString);
+
+      //   // Open An InfoWindow
+      //   infowindow.open(map, markerFight);
+      // });
+    });
   };
 
   triggerInitMap = () => {
@@ -171,24 +253,35 @@ class MapSolo extends Component {
     }
   };
 
-  geocodeAddress = (geocoder, resultsMap) => {
-    var address = "";
+  // geocodeAddress = (geocoder, resultsMap) => {
+  geocodeAddress = (geocoder, resultsMap, address) => {
+    //var address = "4607 N Sheridan Road, Chicago IL 60640";
     geocoder.geocode({ address: address }, function(results, status) {
       if (status === "OK") {
-        resultsMap.setCenter(results[0].geometry.location);
+        //resultsMap.setCenter(results[0].geometry.location);
+
         var icon = {
           url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
           scaledSize: new window.google.maps.Size(50, 50), // scaled size
           origin: new window.google.maps.Point(0, 0), // origin
           anchor: new window.google.maps.Point(0, 0) // anchor
         };
+
         var marker = new window.google.maps.Marker({
           map: resultsMap,
           position: results[0].geometry.location,
           icon: icon
         });
+
+        // console.log(
+        //   `geocode results for ${address}: `,
+        //   results[0].geometry.location
+        // );
+        // return results[0].geometry.location;
       } else {
-        alert("Geocode was not successful for the following reason: " + status);
+        alert(
+          `Geocode for ${address}was not successful for the following reason: ${status}`
+        );
       }
     });
   };
