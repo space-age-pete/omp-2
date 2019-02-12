@@ -4,20 +4,19 @@ import axios from "axios";
 import API from "../../utils/API";
 import MDSpinner from "react-md-spinner";
 import fighters from "../../utils/fighters.json";
+import keys from "../../keys";
 
 class MapSolo extends Component {
   state = {
     venues: [],
     fighters: fighters,
     refs: [],
+    mics: [],
     prevCurrLatLng: {
       lat: null,
       lng: null
     },
-    userCurrLatLng: {
-      lat: null,
-      lng: null
-    },
+    userCurrLatLng: { lat: 41.8781, lng: -87.6298 },
     geolocationErr: false,
     venuesAPIHit: true,
     fightersAPIHit: false,
@@ -71,6 +70,7 @@ class MapSolo extends Component {
   }
 
   loadScript = url => {
+    console.log("loadScript hit");
     var index = window.document.getElementsByTagName("script")[0];
     var script = window.document.createElement("script");
     script.src = url;
@@ -80,44 +80,17 @@ class MapSolo extends Component {
     this.setState({ mapLoaded: true });
   };
 
-  //   getVenues = (lat, lng) => {
-  //     const endPoint =
-  //       "https://ballup-turned-hoopsgram-api.herokuapp.com/api/courts/latLng/";
-  //     axios
-  //       .get(endPoint + lat + "/" + lng)
-  //       .then(response => {
-  //         console.log(response);
-  //         this.setState({
-  //           venues: response.data.courts,
-  //           geolocationErr: false,
-  //           venuesAPIHit: true
-  //         });
-  //         this.triggerInitMap();
-  //       })
-  //       .catch(error => {
-  //         console.log("ERROR!! " + error);
-  //       });
-  //   };
-
   getFighters = () => {
     console.log("this.fighters: ", fighters);
-    this.setState({
-      fighters: fighters,
-      fightersAPIHit: true
-    });
+    this.setState(
+      {
+        fighters: fighters,
+        fightersAPIHit: true
+      },
+      this.triggerInitMap
+    );
     this.triggerInitMap();
   };
-
-  //   getRefs = () => {
-  //     API.getRefTypes()
-  //       .then(response => {
-  //         this.setState({ refs: response.data, refsAPIHit: true });
-  //         this.triggerInitMap();
-  //       })
-  //       .catch(error => {
-  //         console.log("ERROR!! " + error);
-  //       });
-  //   };
 
   initMap = () => {
     console.log(this.state.userCurrLatLng);
@@ -181,12 +154,15 @@ class MapSolo extends Component {
   };
 
   triggerInitMap = () => {
+    console.log("triggerInitMap hit", this.state);
     if (
       !this.state.mapLoaded &&
       (this.state.fightersAPIHit || this.state.fighters.length)
     ) {
       this.loadScript(
-        "https://maps.googleapis.com/maps/api/js?key=AIzaSyC2WljOFv9ujHKJWIgMsrE4Wj3bZA5nBZk&callback=initMap"
+        `https://maps.googleapis.com/maps/api/js?key=${
+          keys.googleMaps.key
+        }&callback=initMap`
       );
     }
   };
