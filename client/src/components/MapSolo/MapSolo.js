@@ -105,6 +105,10 @@ class MapSolo extends Component {
       zoom: 14
     });
 
+    var geocoder = new window.google.maps.Geocoder();
+
+    this.geocodeAddress(geocoder, map);
+
     // Add listener for tilesloaded and update our areTilesloaded state to remove spinner
     map.addListener("tilesloaded", () => {
       this.setState({ areTilesLoaded: true });
@@ -165,6 +169,28 @@ class MapSolo extends Component {
         }&callback=initMap`
       );
     }
+  };
+
+  geocodeAddress = (geocoder, resultsMap) => {
+    var address = "";
+    geocoder.geocode({ address: address }, function(results, status) {
+      if (status === "OK") {
+        resultsMap.setCenter(results[0].geometry.location);
+        var icon = {
+          url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
+          scaledSize: new window.google.maps.Size(50, 50), // scaled size
+          origin: new window.google.maps.Point(0, 0), // origin
+          anchor: new window.google.maps.Point(0, 0) // anchor
+        };
+        var marker = new window.google.maps.Marker({
+          map: resultsMap,
+          position: results[0].geometry.location,
+          icon: icon
+        });
+      } else {
+        alert("Geocode was not successful for the following reason: " + status);
+      }
+    });
   };
 
   render() {
