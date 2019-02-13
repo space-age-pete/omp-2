@@ -5,6 +5,8 @@ const micSchema = new Schema({
   micName: { type: String, required: true },
   locationName: { type: String, required: true },
   address: { type: String, required: true },
+  lat: Number,
+  lng: Number,
   signUpTime: { type: String, required: true },
   startTime: { type: String, required: true },
   day: { type: String, required: true },

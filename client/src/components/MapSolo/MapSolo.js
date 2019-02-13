@@ -74,22 +74,14 @@ class MapSolo extends Component {
     //this.getRefs();
   }
 
-  componentDidUpdate() {
-    if (this.state.mics != this.props.mics) this.getMics();
-    console.log(this.map);
-  }
+  // componentDidUpdate() {
+  //   if (this.state.mics != this.props.mics) this.getMics();
+  //   console.log(this.map);
+  // }
 
   makeMarker = () => {
-    var icon = {
-      url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
-      scaledSize: new window.google.maps.Size(50, 50), // scaled size
-      origin: new window.google.maps.Point(0, 0), // origin
-      anchor: new window.google.maps.Point(0, 0) // anchor
-    };
-
     var marker = new window.google.maps.Marker({
       position: { lat: 41.8781, lng: -87.6298 },
-      icon: icon,
       title: "NEW!!!",
       map: this.state.map
     });
@@ -202,11 +194,17 @@ class MapSolo extends Component {
       geocoder.geocode({ address: mic.address }, function(results, status) {
         if (status === "OK") {
           var markerFight = new window.google.maps.Marker({
-            position: results[0].geometry.location,
+            // position: results[0].geometry.location,
+            position: {
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng()
+            },
             map: map,
             title: mic.micName
             // icon: icon
           });
+
+          console.log("geometry: ", results[0].geometry.location.lat());
 
           // Click on A Marker!
           markerFight.addListener("click", function() {
