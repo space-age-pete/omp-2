@@ -10,6 +10,7 @@ import keys from "../../keys";
 
 class MapSolo extends Component {
   state = {
+    map: null,
     venues: [],
     fighters: fighters,
     refs: [],
@@ -73,9 +74,31 @@ class MapSolo extends Component {
     //this.getRefs();
   }
 
-  componentWillMount() {
-    navigator.geolocation.clearWatch(this.watchId);
+  componentDidUpdate() {
+    if (this.state.mics != this.props.mics) this.getMics();
+    console.log(this.map);
   }
+
+  makeMarker = () => {
+    var icon = {
+      url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
+      scaledSize: new window.google.maps.Size(50, 50), // scaled size
+      origin: new window.google.maps.Point(0, 0), // origin
+      anchor: new window.google.maps.Point(0, 0) // anchor
+    };
+
+    var marker = new window.google.maps.Marker({
+      position: { lat: 41.8781, lng: -87.6298 },
+      icon: icon,
+      title: "NEW!!!",
+      map: this.state.map
+    });
+  };
+
+  // THIS LIFECYCLE METHOD IS DEPRICATED
+  // componentWillMount() {
+  //   navigator.geolocation.clearWatch(this.watchId);
+  // }
 
   loadScript = url => {
     console.log("loadScript hit");
@@ -103,6 +126,7 @@ class MapSolo extends Component {
   };
 
   getMics = () => {
+    console.log("get mics hit");
     if (this.props.mics.length) {
       this.setState(
         {
@@ -143,6 +167,8 @@ class MapSolo extends Component {
       zoom: 14
     });
 
+    this.setState({ map });
+
     var geocoder = new window.google.maps.Geocoder();
 
     //this.geocodeAddress(geocoder, map, "4607 N Sheridan Rd Chicago IL 60640");
@@ -155,49 +181,8 @@ class MapSolo extends Component {
     // Create An InfoWindow
     var infowindow = new window.google.maps.InfoWindow();
 
-    // // Display Dynamic Markers for Fighters
-    // this.state.fighters.map(function(fighters) {
-    //   var contentString = `<div id="content"><div id="siteNotice"></div><img src="http://icons.iconarchive.com/icons/google/noto-emoji-activities/256/52746-boxing-glove-icon.png" class="fighterIcon" /><h2 id="firstHeading" class="firstHeading">${
-    //     fighters.name
-    //   }</h2><h6>Matches Won: ${fighters.matchesWon}</h6><h6>Matches Lost: ${
-    //     fighters.matchesLost
-    //   }</h6><div id="bodyContent"><img src=${
-    //     fighters.img
-    //   } class="fighterImg" /></br><p>${
-    //     fighters.bio
-    //   }</p></p>Need a ref to watch your fight? <b>Reach out now at :</b>${
-    //     fighters.phone
-    //   }</p></div></div>`;
-
-    //   // Create A Marker
-    //   var icon = {
-    //     url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
-    //     scaledSize: new window.google.maps.Size(50, 50), // scaled size
-    //     origin: new window.google.maps.Point(0, 0), // origin
-    //     anchor: new window.google.maps.Point(0, 0) // anchor
-    //   };
-
-    //   var markerFight = new window.google.maps.Marker({
-    //     position: { lat: fighters.lat, lng: fighters.lng },
-    //     map: map,
-    //     title: fighters.name,
-    //     icon: icon
-    //   });
-
-    //   // Click on A Marker!
-    //   markerFight.addListener("click", function() {
-    //     // Change the content
-    //     infowindow.setContent(contentString);
-
-    //     // Open An InfoWindow
-    //     infowindow.open(map, markerFight);
-    //   });
-    // });
-
-    // Display Dynamic Markers for Fighters
-    let testMICS = this.props.mics;
-    //this.state.mics.map(mic => {
-    testMICS.map(mic => {
+    // Display Dynamic Markers for Mics
+    this.state.mics.map(mic => {
       var contentString = `<div id="content"><div id="siteNotice"></div><h2 id="firstHeading" class="firstHeading">${
         mic.micName
       }</h2><h6>At: ${mic.locationName}</h6><h6>${
@@ -205,8 +190,6 @@ class MapSolo extends Component {
       }</h6><div id="bodyContent"><img src=${
         mic.img
       } class="fighterImg" /></div></div>`;
-
-      console.log("testMICS", testMICS);
 
       // Create A Marker
       var icon = {
@@ -221,8 +204,8 @@ class MapSolo extends Component {
           var markerFight = new window.google.maps.Marker({
             position: results[0].geometry.location,
             map: map,
-            title: mic.micName,
-            icon: icon
+            title: mic.micName
+            // icon: icon
           });
 
           // Click on A Marker!
@@ -331,11 +314,17 @@ class MapSolo extends Component {
         )}
         <button
           onClick={() =>
-            console.log("this.state: ", this.state, "this.props: ", this.props)
+            console.log(
+              "this.state: ",
+              this.state.mics.length,
+              "this.props: ",
+              this.props.mics.length
+            )
           }
         >
           click for info MAPSOLO.js
         </button>
+        <button onClick={this.makeMarker}>make marker</button>
       </div>
     );
   }
