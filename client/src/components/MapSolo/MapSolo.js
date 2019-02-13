@@ -5,6 +5,7 @@ import "./MapSolo.css";
 import MDSpinner from "react-md-spinner";
 import fighters from "../../utils/fighters.json";
 import keys from "../../keys";
+import API from "../../utils/API";
 //import EventCard from "../EventCard";
 //import { Link } from "react-router-dom";
 
@@ -191,42 +192,70 @@ class MapSolo extends Component {
         anchor: new window.google.maps.Point(0, 0) // anchor
       };
 
-      geocoder.geocode({ address: mic.address }, function(results, status) {
-        if (status === "OK") {
-          var markerFight = new window.google.maps.Marker({
-            // position: results[0].geometry.location,
-            position: {
+      if (!mic.lat || !mic.lng) {
+        console.log("no lat or no lng");
+        geocoder.geocode({ address: mic.address }, function(results, status) {
+          if (status === "OK") {
+            var markerFight = new window.google.maps.Marker({
+              // position: results[0].geometry.location,
+              position: {
+                lat: results[0].geometry.location.lat(),
+                lng: results[0].geometry.location.lng()
+              },
+              map: map,
+              title: mic.micName
+              // icon: icon
+            });
+
+            console.log("geometry: ", results[0].geometry.location.lat());
+
+            // Click on A Marker!
+            markerFight.addListener("click", function() {
+              // Change the content
+              infowindow.setContent(contentString);
+
+              // Open An InfoWindow
+              infowindow.open(map, markerFight);
+            });
+
+            API.updateMic(mic._id, {
               lat: results[0].geometry.location.lat(),
               lng: results[0].geometry.location.lng()
-            },
-            map: map,
-            title: mic.micName
-            // icon: icon
-          });
+            });
+          } else {
+            alert(
+              `Geocode for ${
+                mic.address
+              }was not successful for the following reason: ${status}`
+            );
+          }
+        });
+      } else {
+        var markerFight = new window.google.maps.Marker({
+          // position: results[0].geometry.location,
+          position: {
+            lat: mic.lat,
+            lng: mic.lng
+          },
+          map: map,
+          title: mic.micName
+          // icon: icon
+        });
 
-          console.log("geometry: ", results[0].geometry.location.lat());
+        // Click on A Marker!
+        markerFight.addListener("click", function() {
+          // Change the content
+          infowindow.setContent(contentString);
+          // infowindow.setContent(
+          //   <div id="content">
+          //     <EventCard key={mic._id} mic={mic} />
+          //   </div>
+          // );
 
-          // Click on A Marker!
-          markerFight.addListener("click", function() {
-            // Change the content
-            infowindow.setContent(contentString);
-            // infowindow.setContent(
-            //   <div id="content">
-            //     <EventCard key={mic._id} mic={mic} />
-            //   </div>
-            // );
-
-            // Open An InfoWindow
-            infowindow.open(map, markerFight);
-          });
-        } else {
-          alert(
-            `Geocode for ${
-              mic.address
-            }was not successful for the following reason: ${status}`
-          );
-        }
-      });
+          // Open An InfoWindow
+          infowindow.open(map, markerFight);
+        });
+      }
 
       // var markerFight = new window.google.maps.Marker({
       //   position: this.geocodeAddress(geocoder, map, mic.address),
