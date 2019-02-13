@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import {
   Card,
   Button,
-  CardImg,
   CardTitle,
   CardText,
-  CardDeck,
   CardSubtitle,
   CardBody,
   Col,
   Row
 } from "reactstrap";
 import "./EventCard.css";
+
+// CardImg,
+// CardDeck,
 
 export default class EventCard extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ export default class EventCard extends React.Component {
                   className="ECardIMG"
                   // width="100%"
                   src={"/" + this.state.mic.img}
-                  alt="Card image cap"
+                  alt=""
                 />
               </Col>
               <Col xs="8">

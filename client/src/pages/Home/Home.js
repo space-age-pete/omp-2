@@ -13,12 +13,9 @@ import {
   TabPane,
   Nav,
   NavItem,
-  NavLink,
-  Card,
-  Button,
-  CardTitle,
-  CardText
+  NavLink
 } from "reactstrap";
+import MapSolo from "../../components/MapSolo";
 
 // Form,
 //   FormGroup,
@@ -150,13 +147,20 @@ class Home extends Component {
                 </Jumbotron>
               </TabPane>
               <TabPane tabId="2">
-                <Row>
-                  <Col sm="6">Coming</Col>
-                  <Col sm="6">Soon</Col>
-                </Row>
+                <Jumbotron>
+                  <MapSolo mics={this.state.mics} />
+                  {/* <MapSolo /> */}
+                </Jumbotron>
               </TabPane>
             </TabContent>
           </Col>
+          <button
+            onClick={() =>
+              console.log("HOME state mics length ", this.state.mics.length)
+            }
+          >
+            click for info HOME.js
+          </button>
         </Row>
       </Container>
     );
@@ -167,8 +171,6 @@ export default Home;
 
 //<h5>{this.state.mics[0].micName}</h5>
 
-{
-  /* <h5 key={mic._id}>
+/* <h5 key={mic._id}>
   <Link to={"/mics/" + mic._id}>{mic.micName}</Link>
 </h5>; */
-}

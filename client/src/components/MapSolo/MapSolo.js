@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "./MapSolo.css";
-import axios from "axios";
-import API from "../../utils/API";
+//import axios from "axios";
+//import API from "../../utils/API";
 import MDSpinner from "react-md-spinner";
 import fighters from "../../utils/fighters.json";
 import keys from "../../keys";
-import EventCard from "../EventCard";
-import { Link } from "react-router-dom";
+//import EventCard from "../EventCard";
+//import { Link } from "react-router-dom";
 
 class MapSolo extends Component {
   state = {
@@ -44,6 +44,7 @@ class MapSolo extends Component {
       prevCurrLatLng,
       userCurrLatLng
     });
+    this.getMics();
     //this.getVenues(userCurrLatLng.lat, userCurrLatLng.lng);
   };
 
@@ -53,6 +54,7 @@ class MapSolo extends Component {
       geolocationErr: true,
       userCurrLatLng: { lat: 41.8781, lng: -87.6298 }
     });
+    this.getMics();
     //this.getVenues(41.8781, -87.6298);
   };
 
@@ -63,6 +65,8 @@ class MapSolo extends Component {
       this.getLocationOptions
     );
     window.initMap = this.initMap;
+
+    console.log("Component Did Mount");
 
     this.getFighters();
     this.getMics();
@@ -86,6 +90,7 @@ class MapSolo extends Component {
 
   getFighters = () => {
     console.log("this.fighters: ", fighters);
+
     this.setState(
       {
         fighters: fighters,
@@ -93,24 +98,36 @@ class MapSolo extends Component {
       },
       this.triggerInitMap
     );
+
     this.triggerInitMap();
   };
 
   getMics = () => {
-    API.getMics()
-      .then(response => {
-        console.log("getMics response", response);
-        this.setState(
-          {
-            mics: response.data,
-            micsAPIHit: true
-          },
-          this.triggerInitMap
-        );
-      })
-      .catch(error => {
-        console.log("ERROR!! " + error);
-      });
+    if (this.props.mics.length) {
+      this.setState(
+        {
+          mics: this.props.mics,
+          micsAPIHit: true
+        },
+        this.triggerInitMap
+      );
+    } else {
+      // API.getMics()
+      //   .then(response => {
+      //     console.log("getMics response", response);
+      //     this.setState(
+      //       {
+      //         mics: response.data,
+      //         micsAPIHit: true
+      //       },
+      //       this.triggerInitMap
+      //     );
+      //   })
+      //   .catch(error => {
+      //     console.log("ERROR!! " + error);
+      //   });
+    }
+    this.triggerInitMap();
   };
 
   initMap = () => {
@@ -178,7 +195,9 @@ class MapSolo extends Component {
     // });
 
     // Display Dynamic Markers for Fighters
-    this.state.mics.map(mic => {
+    let testMICS = this.props.mics;
+    //this.state.mics.map(mic => {
+    testMICS.map(mic => {
       var contentString = `<div id="content"><div id="siteNotice"></div><h2 id="firstHeading" class="firstHeading">${
         mic.micName
       }</h2><h6>At: ${mic.locationName}</h6><h6>${
@@ -186,6 +205,8 @@ class MapSolo extends Component {
       }</h6><div id="bodyContent"><img src=${
         mic.img
       } class="fighterImg" /></div></div>`;
+
+      console.log("testMICS", testMICS);
 
       // Create A Marker
       var icon = {
@@ -247,10 +268,10 @@ class MapSolo extends Component {
   };
 
   triggerInitMap = () => {
-    console.log("triggerInitMap hit", this.state);
+    //console.log("triggerInitMap hit", this.state);
     if (
       !this.state.mapLoaded &&
-      (this.state.fightersAPIHit || this.state.fighters.length)
+      (this.state.micsAPIHit || this.state.mics.length)
     ) {
       this.loadScript(
         `https://maps.googleapis.com/maps/api/js?key=${
@@ -305,9 +326,16 @@ class MapSolo extends Component {
         <main>
           <div id="map" />
         </main>
-        {!this.state.areTilesLoaded && !this.state.fighters.length && (
+        {!this.state.areTilesLoaded && !this.state.mics.length && (
           <MDSpinner className="spinner" size={100} />
         )}
+        <button
+          onClick={() =>
+            console.log("this.state: ", this.state, "this.props: ", this.props)
+          }
+        >
+          click for info MAPSOLO.js
+        </button>
       </div>
     );
   }
