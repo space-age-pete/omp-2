@@ -16,6 +16,7 @@ class MapSolo extends Component {
     fighters: fighters,
     refs: [],
     mics: [],
+    markerArr: [],
     prevCurrLatLng: {
       lat: null,
       lng: null
@@ -160,7 +161,7 @@ class MapSolo extends Component {
       zoom: 14
     });
 
-    this.setState({ map });
+    //this.setState({ map });
 
     var geocoder = new window.google.maps.Geocoder();
 
@@ -175,7 +176,7 @@ class MapSolo extends Component {
     var infowindow = new window.google.maps.InfoWindow();
 
     // Display Dynamic Markers for Mics
-    this.state.mics.map(mic => {
+    let markerArr = this.state.mics.map(mic => {
       var contentString = `<div id="content"><div id="siteNotice"></div><h2 id="firstHeading" class="firstHeading">${
         mic.micName
       }</h2><h6>At: ${mic.locationName}</h6><h6>${
@@ -207,7 +208,7 @@ class MapSolo extends Component {
               // icon: icon
             });
 
-            console.log("geometry: ", results[0].geometry.location.lat());
+            //console.log("geometry: ", results[0].geometry.location.lat());
 
             // Click on A Marker!
             markerFight.addListener("click", function() {
@@ -222,6 +223,8 @@ class MapSolo extends Component {
               lat: results[0].geometry.location.lat(),
               lng: results[0].geometry.location.lng()
             });
+
+            return markerFight;
           } else {
             alert(
               `Geocode for ${
@@ -255,6 +258,7 @@ class MapSolo extends Component {
           // Open An InfoWindow
           infowindow.open(map, markerFight);
         });
+        return markerFight;
       }
 
       // var markerFight = new window.google.maps.Marker({
@@ -275,6 +279,10 @@ class MapSolo extends Component {
       //   infowindow.open(map, markerFight);
       // });
     });
+
+    console.log(markerArr);
+
+    this.setState({ map, markerArr: markerArr });
   };
 
   triggerInitMap = () => {
@@ -329,7 +337,7 @@ class MapSolo extends Component {
       this.state.geolocationErr ||
       this.state.userCurrLatLng === this.state.prevCurrLatLng
     ) {
-      console.log("not sure");
+      //console.log("not sure");
     }
     return (
       <div>
@@ -343,7 +351,7 @@ class MapSolo extends Component {
           onClick={() =>
             console.log(
               "this.state: ",
-              this.state.mics.length,
+              this.state,
               "this.props: ",
               this.props.mics.length
             )
