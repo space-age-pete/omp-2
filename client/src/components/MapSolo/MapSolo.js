@@ -89,6 +89,31 @@ class MapSolo extends Component {
     });
   };
 
+  hideAllMarkers = () => {
+    this.state.markerArr.forEach(marker => {
+      marker.setMap(null);
+    });
+  };
+
+  showAllMarkers = () => {
+    this.state.markerArr.forEach(marker => {
+      marker.setMap(this.state.map);
+    });
+  };
+
+  updateMarkers = () => {
+    this.state.markerArr.forEach(marker => {
+      let found = false;
+      this.props.mics.forEach(mic => {
+        if (mic.micName === marker.title) {
+          found = true;
+          return marker.setMap(this.state.map);
+        }
+      });
+      if (!found) marker.setMap(null);
+    });
+  };
+
   // THIS LIFECYCLE METHOD IS DEPRICATED
   // componentWillMount() {
   //   navigator.geolocation.clearWatch(this.watchId);
@@ -145,7 +170,7 @@ class MapSolo extends Component {
       //     console.log("ERROR!! " + error);
       //   });
     }
-    this.triggerInitMap();
+    //this.triggerInitMap();
   };
 
   initMap = () => {
@@ -360,6 +385,9 @@ class MapSolo extends Component {
           click for info MAPSOLO.js
         </button>
         <button onClick={this.makeMarker}>make marker</button>
+        <button onClick={this.hideAllMarkers}>hide markers</button>
+        <button onClick={this.showAllMarkers}>show markers</button>
+        <button onClick={this.updateMarkers}>update markers</button>
       </div>
     );
   }
