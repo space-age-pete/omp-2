@@ -16,7 +16,6 @@ import {
   NavLink
 } from "reactstrap";
 import MapSolo from "../../components/MapSolo";
-import JoshComponent from "../../components/JoshComponent";
 
 // Form,
 //   FormGroup,
@@ -152,7 +151,6 @@ class Home extends Component {
                 <Jumbotron>
                   <MapSolo mics={this.state.mics} />
                   {/* <MapSolo /> */}
-                  <JoshComponent parentThing={this.state.HomeThing} />
                 </Jumbotron>
               </TabPane>
             </TabContent>
@@ -164,13 +162,13 @@ class Home extends Component {
           >
             click for info HOME.js
           </button> */}
-          <button
+          {/* <button
             onClick={() =>
               this.setState({ HomeThing: this.state.HomeThing + 1 })
             }
           >
             update homething state
-          </button>
+          </button> */}
         </Row>
       </Container>
     );

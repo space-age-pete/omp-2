@@ -110,7 +110,7 @@ class MapSolo extends Component {
           return marker.setMap(this.state.map);
         }
       });
-      if (!found) marker.setMap(null);
+      if (!found || this.props.mics.length === 0) marker.setMap(null);
     });
   };
 
@@ -146,7 +146,8 @@ class MapSolo extends Component {
 
   getMics = cb => {
     console.log("get mics hit");
-    if (this.props.mics.length) {
+    // not sure why i need to put the or statement in but it seems to work
+    if (this.props.mics.length || this.state.mics.length) {
       this.setState(
         {
           mics: this.props.mics,
@@ -375,7 +376,7 @@ class MapSolo extends Component {
         {!this.state.areTilesLoaded && !this.state.mics.length && (
           <MDSpinner className="spinner" size={100} />
         )}
-        <button
+        {/* <button
           onClick={() =>
             console.log(
               "this.state: ",
@@ -390,7 +391,7 @@ class MapSolo extends Component {
         <button onClick={this.makeMarker}>make marker</button>
         <button onClick={this.hideAllMarkers}>hide markers</button>
         <button onClick={this.showAllMarkers}>show markers</button>
-        <button onClick={this.updateMarkers}>update markers</button>
+        <button onClick={this.updateMarkers}>update markers</button> */}
       </div>
     );
   }
