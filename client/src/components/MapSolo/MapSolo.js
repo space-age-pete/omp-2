@@ -47,7 +47,7 @@ class MapSolo extends Component {
       prevCurrLatLng,
       userCurrLatLng
     });
-    this.getMics();
+    this.getMics(this.triggerInitMap);
     //this.getVenues(userCurrLatLng.lat, userCurrLatLng.lng);
   };
 
@@ -57,7 +57,7 @@ class MapSolo extends Component {
       geolocationErr: true,
       userCurrLatLng: { lat: 41.8781, lng: -87.6298 }
     });
-    this.getMics();
+    this.getMics(this.triggerInitMap);
     //this.getVenues(41.8781, -87.6298);
   };
 
@@ -72,14 +72,14 @@ class MapSolo extends Component {
     console.log("Component Did Mount");
 
     this.getFighters();
-    this.getMics();
+    this.getMics(this.triggerInitMap);
     //this.getRefs();
   }
 
-  // componentDidUpdate() {
-  //   if (this.state.mics != this.props.mics) this.getMics();
-  //   console.log(this.map);
-  // }
+  componentDidUpdate() {
+    if (this.state.mics != this.props.mics) this.getMics(this.updateMarkers);
+    console.log(this.map);
+  }
 
   makeMarker = () => {
     var marker = new window.google.maps.Marker({
@@ -144,7 +144,7 @@ class MapSolo extends Component {
     this.triggerInitMap();
   };
 
-  getMics = () => {
+  getMics = cb => {
     console.log("get mics hit");
     if (this.props.mics.length) {
       this.setState(
@@ -152,7 +152,10 @@ class MapSolo extends Component {
           mics: this.props.mics,
           micsAPIHit: true
         },
-        this.triggerInitMap
+        () => {
+          if (cb) cb();
+        }
+        //this.triggerInitMap
       );
     } else {
       // API.getMics()
