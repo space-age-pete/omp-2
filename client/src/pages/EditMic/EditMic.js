@@ -108,7 +108,9 @@ export default class EditMic extends Component {
         day: this.state.day,
         host: this.state.host,
         slotLength: this.state.slotLength,
-        micImage: this.state.micImage
+        micImage: this.state.micImage,
+        lat: null,
+        lng: null
       })
         .catch(err => console.log(err))
         .then(res => {

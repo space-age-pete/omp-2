@@ -7,7 +7,7 @@ import fighters from "../../utils/fighters.json";
 import keys from "../../keys";
 import API from "../../utils/API";
 //import EventCard from "../EventCard";
-//import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class MapSolo extends Component {
   state = {
@@ -190,6 +190,23 @@ class MapSolo extends Component {
       zoom: 14
     });
 
+    var icon = {
+      url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
+      scaledSize: new window.google.maps.Size(30, 30), // scaled size
+      origin: new window.google.maps.Point(0, 0), // origin
+      anchor: new window.google.maps.Point(0, 0) // anchor
+    };
+
+    let youMarker = new window.google.maps.Marker({
+      // position: results[0].geometry.location,
+      position: {
+        lat: this.state.userCurrLatLng.lat,
+        lng: this.state.userCurrLatLng.lng
+      },
+      map: map,
+      title: "You Are Here",
+      icon: icon
+    });
     //this.setState({ map });
 
     var geocoder = new window.google.maps.Geocoder();
@@ -206,21 +223,33 @@ class MapSolo extends Component {
 
     // Display Dynamic Markers for Mics
     let markerArr = this.state.mics.map(mic => {
-      var contentString = `<div id="content"><div id="siteNotice"></div><h2 id="firstHeading" class="firstHeading">${
+      var contentString = `<div id="content"><div id="siteNotice"></div><h4 id="firstHeading" class="firstHeading">${
         mic.micName
-      }</h2><h6>At: ${mic.locationName}</h6><h6>${
-        mic.address
-      }</h6><div id="bodyContent"><img src=${
-        mic.img
-      } class="fighterImg" /></div></div>`;
+      }</h4><p>${mic.locationName}, ${mic.address}</p><a href="/mics/${
+        mic._id
+      }" style="color:black;">More Info</a><div id="bodyContent"></div></div>`;
+
+      // var contentString = (
+      //   <div id="content">
+      //     <div id="siteNotice" />
+      //     <h2 id="firstHeading" class="firstHeading">
+      //       ${mic.micName}
+      //     </h2>
+      //     <h6>At: {mic.locationName}</h6>
+      //     <h6>{mic.address}</h6>
+      //     <div id="bodyContent">
+      //       <img src={mic.img} class="fighterImg" />
+      //     </div>
+      //   </div>
+      // );
 
       // Create A Marker
-      var icon = {
-        url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
-        scaledSize: new window.google.maps.Size(50, 50), // scaled size
-        origin: new window.google.maps.Point(0, 0), // origin
-        anchor: new window.google.maps.Point(0, 0) // anchor
-      };
+      // var icon = {
+      //   url: "https://66.media.tumblr.com/avatar_87b874867ea4_128.pnj", // url
+      //   scaledSize: new window.google.maps.Size(50, 50), // scaled size
+      //   origin: new window.google.maps.Point(0, 0), // origin
+      //   anchor: new window.google.maps.Point(0, 0) // anchor
+      // };
 
       if (!mic.lat || !mic.lng) {
         console.log("no lat or no lng");
@@ -372,10 +401,11 @@ class MapSolo extends Component {
       <div>
         <main>
           <div id="map" />
+          {!this.state.areTilesLoaded && !this.state.mics.length && (
+            <MDSpinner className="spinner" size={100} />
+          )}
         </main>
-        {!this.state.areTilesLoaded && !this.state.mics.length && (
-          <MDSpinner className="spinner" size={100} />
-        )}
+
         {/* <button
           onClick={() =>
             console.log(
