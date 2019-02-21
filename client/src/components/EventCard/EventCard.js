@@ -39,11 +39,16 @@ export default class EventCard extends React.Component {
                 />
               </Col>
               <Col xs="8">
-                <CardTitle>
-                  {this.state.mic.micName} at {this.state.mic.locationName}
-                </CardTitle>
-                <CardSubtitle>List at {this.state.mic.signUpTime}</CardSubtitle>
-                <CardText>Show at {this.state.mic.startTime}</CardText>
+                <CardTitle>{this.state.mic.micName}</CardTitle>
+                <CardSubtitle>
+                  {this.state.mic.day}s at {this.state.mic.locationName}
+                </CardSubtitle>
+                <br />
+                <CardText>
+                  List at {this.state.mic.signUpTime}
+                  <br />
+                  Show at {this.state.mic.startTime}
+                </CardText>
                 <Button>
                   <Link to={"/mics/" + this.state.mic._id}>More Info</Link>
                 </Button>

@@ -1,3 +1,3 @@
-# omp-2
+#OMP
 
-#this is the second omp.
+#A better way to find open mic events in Chicago
