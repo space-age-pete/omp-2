@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import API from "../../utils/API";
 import {
   Col,
@@ -23,7 +24,8 @@ export default class SignUp extends Component {
     usernameValid: "",
     passwordValid: "",
     confirmPasswordValid: "",
-    valid: { username: "", password: "", confirmPassword: "" }
+    valid: { username: "", password: "", confirmPassword: "" },
+    redirectTo: null
   };
 
   handleInputChange = event => {
@@ -116,101 +118,127 @@ export default class SignUp extends Component {
           console.log("response: ", response);
           this.usernameValidate(response.data);
         })
-        // .then(
-        //   API.LoginUser({
-        //     username: this.state.username,
-        //     password: this.state.password
-        //   })
-        // )
+        .then(
+          API.LoginUser({
+            username: this.state.username,
+            password: this.state.password
+          }).then(response => {
+            console.log("login response: ");
+            console.log(response);
+            //console.log("response.data: ", response.config);
+            console.log("status: ", response.status);
+            if (response.status === 200) {
+              // update App.js state
+              this.props.updateUser({
+                loggedIn: true,
+                username: response.data.username,
+                userID: response.data.id
+              });
+              // update the state to redirect to home
+              this.setState({
+                redirectTo: "/"
+              });
+            }
+          })
+        )
+
         //.then(() => this.props.history.push(`/mics`))
         .catch(err => console.log("err: ", err));
       //   .then(() => this.props.history.push(`/mics`));
 
-      console.log("be more");
+      console.log("state: ", this.state);
 
       //above redirect could be cleaner
     }
   };
 
   render() {
-    return (
-      <Container>
-        <Jumbotron className="formJumbo">
-          <Form>
-            <FormGroup row>
-              <Label for="username">
-                Username<span className="asterisk">&nbsp;*</span>
-              </Label>
+    if (this.state.redirectTo) {
+      return <Redirect to={{ pathname: this.state.redirectTo }} />;
+    } else {
+      return (
+        <Container>
+          <Jumbotron className="formJumbo">
+            <Form>
+              <FormGroup row>
+                <Label for="username">
+                  Username<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                className={this.state.usernameValid}
-                value={this.state.username}
-                onChange={this.handleInputChange}
-                onBlur={() => this.validate("username")}
-                type="text"
-                name="username"
-                id="username"
-              />
-              <FormFeedback invalid="true">
-                That username is already taken
-              </FormFeedback>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="password">
-                Password<span className="asterisk">&nbsp;*</span>
-              </Label>
+                <Input
+                  className={this.state.usernameValid}
+                  value={this.state.username}
+                  onChange={this.handleInputChange}
+                  onBlur={() => this.validate("username")}
+                  type="text"
+                  name="username"
+                  id="username"
+                />
+                <FormFeedback invalid="true">
+                  That username is already taken
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="password">
+                  Password<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                //{this.state.passwordValid}
-                className={this.state.passwordValid}
-                value={this.state.password}
-                onChange={this.handleInputChange}
-                onBlur={() => this.validate("password")}
-                type="password"
-                name="password"
-                id="password"
-              />
-              <FormFeedback valid>You did very well</FormFeedback>
-              <FormFeedback invalid="true">Password is too short</FormFeedback>
-            </FormGroup>
-            <FormGroup row>
-              <Label for="confirmPassword">
-                Confirm Password<span className="asterisk">&nbsp;*</span>
-              </Label>
+                <Input
+                  //{this.state.passwordValid}
+                  className={this.state.passwordValid}
+                  value={this.state.password}
+                  onChange={this.handleInputChange}
+                  onBlur={() => this.validate("password")}
+                  type="password"
+                  name="password"
+                  id="password"
+                />
+                {/* <FormFeedback valid>You did very well</FormFeedback> */}
+                <FormFeedback invalid="true">
+                  Password is too short
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup row>
+                <Label for="confirmPassword">
+                  Confirm Password<span className="asterisk">&nbsp;*</span>
+                </Label>
 
-              <Input
-                //valid
-                className={this.state.confirmPasswordValid}
-                value={this.state.confirmPassword}
-                onChange={this.handleInputChange}
-                onBlur={() => this.validate("confirmPassword")}
-                type="password"
-                name="confirmPassword"
-                id="confirmPassword"
-              />
-              <FormFeedback valid>You did very well</FormFeedback>
-              <FormFeedback invalid="true">Passwords do not match</FormFeedback>
-            </FormGroup>
-            <FormGroup check row>
-              {/* <Col sm={{ size: 10, offset: 2 }}> */}
-              <Button
-                disabled={
-                  !(
-                    this.state.username &&
-                    this.state.password &&
-                    this.state.confirmPassword
-                  )
-                }
-                onClick={this.handleFormSubmit}
-              >
-                Submit
-              </Button>
-              {/* </Col> */}
-            </FormGroup>
-            {/* <Button onClick={() => console.log(this.state)} /> */}
-          </Form>
-        </Jumbotron>
-      </Container>
-    );
+                <Input
+                  //valid
+                  className={this.state.confirmPasswordValid}
+                  value={this.state.confirmPassword}
+                  onChange={this.handleInputChange}
+                  onBlur={() => this.validate("confirmPassword")}
+                  type="password"
+                  name="confirmPassword"
+                  id="confirmPassword"
+                />
+                {/* <FormFeedback valid>You did very well</FormFeedback> */}
+                <FormFeedback invalid="true">
+                  Passwords do not match
+                </FormFeedback>
+              </FormGroup>
+              <FormGroup check row>
+                {/* <Col sm={{ size: 10, offset: 2 }}> */}
+                <Button
+                  disabled={
+                    !(
+                      this.state.username &&
+                      this.state.password &&
+                      this.state.confirmPassword
+                    )
+                  }
+                  onClick={this.handleFormSubmit}
+                >
+                  Submit
+                </Button>
+                {/* </Col> */}
+              </FormGroup>
+              {/* <Button onClick={() => console.log(this.state)} /> */}
+            </Form>
+          </Jumbotron>
+        </Container>
+      );
+    }
   }
 }
