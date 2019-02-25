@@ -93,10 +93,35 @@ export default class SignUp extends Component {
         console.log(this.state)
       );
     } else {
-      this.setState({ usernameValid: "is-valid" }, () =>
-        console.log(this.state)
-      );
+      this.setState({ usernameValid: "is-valid" }, () => this.nowLogIn());
     }
+  };
+
+  nowLogIn = something => {
+    //this is in both sign up and log in maybe
+    //find a way to do code reuse
+
+    API.LoginUser({
+      username: this.state.username,
+      password: this.state.password
+    }).then(response => {
+      console.log("login response: ");
+      console.log(response);
+      //console.log("response.data: ", response.config);
+      console.log("status: ", response.status);
+      if (response.status === 200) {
+        // update App.js state
+        this.props.updateUser({
+          loggedIn: true,
+          username: response.data.username,
+          userID: response.data.id
+        });
+        // update the state to redirect to home
+        this.setState({
+          redirectTo: "/"
+        });
+      }
+    });
   };
 
   handleFormSubmit = event => {
@@ -118,29 +143,6 @@ export default class SignUp extends Component {
           console.log("response: ", response);
           this.usernameValidate(response.data);
         })
-        .then(
-          API.LoginUser({
-            username: this.state.username,
-            password: this.state.password
-          }).then(response => {
-            console.log("login response: ");
-            console.log(response);
-            //console.log("response.data: ", response.config);
-            console.log("status: ", response.status);
-            if (response.status === 200) {
-              // update App.js state
-              this.props.updateUser({
-                loggedIn: true,
-                username: response.data.username,
-                userID: response.data.id
-              });
-              // update the state to redirect to home
-              this.setState({
-                redirectTo: "/"
-              });
-            }
-          })
-        )
 
         //.then(() => this.props.history.push(`/mics`))
         .catch(err => console.log("err: ", err));
