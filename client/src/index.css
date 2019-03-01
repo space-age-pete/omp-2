@@ -27,6 +27,10 @@ a {
   color: white;
 }
 
+a.blue {
+  color: blue
+}
+
 .asterisk{
   color: rgb(161, 1, 1);
 }

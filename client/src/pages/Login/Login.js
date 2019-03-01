@@ -16,6 +16,8 @@ import {
 //import "../SignUp/SignUp.css";
 
 //FormText, Row,
+// IT IS POSSIBLE TO LET YOU KNOW
+// WHETHER YOUR USERNAME OR PASS IS WRONG
 
 export default class Login extends Component {
   state = {
@@ -81,7 +83,7 @@ export default class Login extends Component {
             <Form>
               <FormGroup row>
                 <Label for="username">
-                  Username<span className="asterisk">&nbsp;*</span>
+                  Username
                 </Label>
 
                 <Input
@@ -95,7 +97,7 @@ export default class Login extends Component {
               </FormGroup>
               <FormGroup row>
                 <Label for="password">
-                  Password<span className="asterisk">&nbsp;*</span>
+                  Password
                 </Label>
 
                 <Input

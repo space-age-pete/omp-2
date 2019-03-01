@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import API from "../../utils/API";
 import {
   Col,
@@ -177,7 +177,10 @@ export default class SignUp extends Component {
                   id="username"
                 />
                 <FormFeedback invalid="true">
-                  That username is already taken
+                  That username is already taken. If this is you,{" "}
+                  <Link to="/login" className="blue">
+                    log in!
+                  </Link>
                 </FormFeedback>
               </FormGroup>
               <FormGroup row>
