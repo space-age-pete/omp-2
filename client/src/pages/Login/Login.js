@@ -36,7 +36,7 @@ export default class Login extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    //cleaner way to do this with destructuring or w/e?
+
     if (this.state.username && this.state.password) {
       API.LoginUser({
         username: this.state.username,
@@ -79,12 +79,10 @@ export default class Login extends Component {
     } else {
       return (
         <Container>
-          <Jumbotron className="formJumbo">
+          <Jumbotron className="loginJumbo">
             <Form>
               <FormGroup row>
-                <Label for="username">
-                  Username
-                </Label>
+                <Label for="username">Username</Label>
 
                 <Input
                   className={this.state.valid}
@@ -96,9 +94,7 @@ export default class Login extends Component {
                 />
               </FormGroup>
               <FormGroup row>
-                <Label for="password">
-                  Password
-                </Label>
+                <Label for="password">Password</Label>
 
                 <Input
                   className={this.state.valid}
@@ -112,15 +108,19 @@ export default class Login extends Component {
                   Username or Password is incorrect
                 </FormFeedback>
               </FormGroup>
-              <FormGroup check row>
-                <Col sm={10}>
-                  <Button
-                    disabled={!(this.state.username && this.state.password)}
-                    onClick={this.handleFormSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Col>
+              {/* <FormGroup check row> */}
+              <FormGroup>
+                {/* <Col sm={10}> */}
+                {/* <Col> */}
+                <Button
+                  type="submit"
+                  disabled={!(this.state.username && this.state.password)}
+                  onClick={this.handleFormSubmit}
+                >
+                  Log In
+                </Button>
+
+                {/* </Col> */}
               </FormGroup>
             </Form>
           </Jumbotron>
