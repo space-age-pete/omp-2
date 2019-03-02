@@ -226,6 +226,7 @@ export default class SignUp extends Component {
               <FormGroup check row>
                 {/* <Col sm={{ size: 10, offset: 2 }}> */}
                 <Button
+                  type="submit"
                   disabled={
                     !(
                       this.state.username &&
