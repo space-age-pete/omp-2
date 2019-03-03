@@ -42,12 +42,7 @@ a.blue {
   padding: 64px;
 }
 
-.loginJumbo {
-  width: 400px;
-  margin: auto;
-  /* background-color: red; */
-  padding: 64px;
-}
+
 
 .jumbotron {
   background-color:white;
@@ -61,4 +56,51 @@ a.blue {
 
 #searchbtn {
   background-color: rgb(233, 233, 233);
+}
+
+/* FOR PAGE: LOGIN */
+/* FOR PAGE: LOGIN */
+
+.loginJumbo {
+  width: 400px;
+  margin: auto;
+  /* background-color: red; */
+  padding: 0px 64px 54px 64px;
+}
+
+#loginButton {
+  width: 100%;
+}
+
+#loginTitle {
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+#loginBackground {
+  /* width: 1000px; */
+  height: 700px;
+  padding-top: 100px;
+  background-image: url("https://3c1703fe8d.site.internapcdn.net/newman/gfx/news/2018/europeslostf.jpg");
+  background-size: cover;
+}
+
+/* FOR PAGE: LOGIN */
+/* FOR PAGE: LOGIN */
+
+#signupJumbo {
+  width: 600px;
+  margin: auto;
+  /* background-color: red; */
+  padding: 0px 64px 54px 64px;
+}
+
+
+#signupTitle {
+  margin: auto;
+  padding-top: 40px;
+  padding-bottom: 30px;
+  text-align: center;
 }

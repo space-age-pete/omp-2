@@ -160,7 +160,8 @@ export default class SignUp extends Component {
     } else {
       return (
         <Container>
-          <Jumbotron className="formJumbo">
+          <Jumbotron id="signupJumbo">
+            <h3 id="signupTitle">Create A Free Account</h3>
             <Form>
               <FormGroup row>
                 <Label for="username">

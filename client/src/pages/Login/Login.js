@@ -79,51 +79,55 @@ export default class Login extends Component {
     } else {
       return (
         <Container>
-          <Jumbotron className="loginJumbo">
-            <Form>
-              <FormGroup row>
-                <Label for="username">Username</Label>
+          <div id="loginBackground">
+            <Jumbotron className="loginJumbo">
+              <h3 id="loginTitle">Log In to OMP</h3>
+              <Form>
+                <FormGroup row>
+                  <Label for="username">Username</Label>
 
-                <Input
-                  className={this.state.valid}
-                  value={this.state.username}
-                  onChange={this.handleInputChange}
-                  type="text"
-                  name="username"
-                  id="username"
-                />
-              </FormGroup>
-              <FormGroup row>
-                <Label for="password">Password</Label>
+                  <Input
+                    className={this.state.valid}
+                    value={this.state.username}
+                    onChange={this.handleInputChange}
+                    type="text"
+                    name="username"
+                    id="username"
+                  />
+                </FormGroup>
+                <FormGroup row>
+                  <Label for="password">Password</Label>
 
-                <Input
-                  className={this.state.valid}
-                  value={this.state.password}
-                  onChange={this.handleInputChange}
-                  type="password"
-                  name="password"
-                  id="password"
-                />
-                <FormFeedback invalid="true">
-                  Username or Password is incorrect
-                </FormFeedback>
-              </FormGroup>
-              {/* <FormGroup check row> */}
-              <FormGroup>
-                {/* <Col sm={10}> */}
-                {/* <Col> */}
-                <Button
-                  type="submit"
-                  disabled={!(this.state.username && this.state.password)}
-                  onClick={this.handleFormSubmit}
-                >
-                  Log In
-                </Button>
+                  <Input
+                    className={this.state.valid}
+                    value={this.state.password}
+                    onChange={this.handleInputChange}
+                    type="password"
+                    name="password"
+                    id="password"
+                  />
+                  <FormFeedback invalid="true">
+                    Username or Password is incorrect
+                  </FormFeedback>
+                </FormGroup>
+                {/* <FormGroup check row> */}
+                <FormGroup>
+                  {/* <Col sm={10}> */}
+                  {/* <Col> */}
+                  <Button
+                    type="submit"
+                    id="loginButton"
+                    disabled={!(this.state.username && this.state.password)}
+                    onClick={this.handleFormSubmit}
+                  >
+                    Log In
+                  </Button>
 
-                {/* </Col> */}
-              </FormGroup>
-            </Form>
-          </Jumbotron>
+                  {/* </Col> */}
+                </FormGroup>
+              </Form>
+            </Jumbotron>
+          </div>
         </Container>
       );
     }
