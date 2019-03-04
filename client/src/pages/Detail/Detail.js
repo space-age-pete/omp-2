@@ -1,24 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
-import { Container, Row, Col, Button, Jumbotron } from "reactstrap";
+import { Container, Row, Col, Button, Jumbotron, Alert } from "reactstrap";
 import "./Detail.css";
 
 class Detail extends Component {
   state = {
-    mic: {}
+    mic: {},
+    user: {},
+    alertVisible: false
   };
   // When this component mounts, grab the mic with the _id of this.props.match.params.id
   // e.g. localhost:3000/mics/599dcb67f0f16317844583fc
   componentDidMount() {
     console.log("this.props", this.props);
+    this.loadMic();
+    //this.loadUser();
+  }
+
+  loadMic = () => {
     API.getMic(this.props.match.params.id)
       .then(res => {
         this.setState({ mic: res.data });
         console.log(res.data);
       })
       .catch(err => console.log(err));
-  }
+  };
+
+  // loadUser = () => {
+  //   API.getUser()
+  //     .then(res => {
+  //       this.setState({ user: res.data });
+  //     })
+  //     .catch(err => console.log(err));
+  // };
 
   deleteThis = event => {
     event.preventDefault();
@@ -45,6 +60,10 @@ class Detail extends Component {
       .catch(err => console.log(err));
   };
 
+  alertToggle = () => {
+    this.setState({ alertVisible: !this.state.alertVisible });
+  };
+
   addToFavorites = event => {
     event.preventDefault();
 
@@ -52,8 +71,9 @@ class Detail extends Component {
       favorites: this.props.match.params.id
     })
       .then(res => {
-        console.log(res.data);
+        //console.log(res.data);
         //this.props.history.push(`/mics`);
+        this.alertToggle();
       })
       .catch(err => console.log(err));
   };
@@ -111,6 +131,9 @@ class Detail extends Component {
               </Button>
             </div>
           )}
+          <Alert color="success" isOpen={this.state.alertVisible}>
+            This is a success alert — check it out!
+          </Alert>
         </Jumbotron>
       </Container>
     );
