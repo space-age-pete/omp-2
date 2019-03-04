@@ -42,8 +42,9 @@ module.exports = {
   //     .catch(err => res.status(422).json(err));
   // },
   addToFavorites: function(req, res) {
+    console.log("addtoFavs req.body: ", req.body);
     db.User.findOneAndUpdate(
-      { _id: req.params.id },
+      { _id: req.params.id, favorites: { $ne: req.body.favorites } },
       { $push: req.body },
       { new: true }
     )

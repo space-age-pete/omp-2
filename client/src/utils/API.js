@@ -45,6 +45,7 @@ export default {
     return axios.post("/auth/logout", userData);
   },
 
+  //USER paths
   updateUser: function(userData) {
     return axios.post("/api/users", userData);
   }
