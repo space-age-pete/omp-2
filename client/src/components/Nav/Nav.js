@@ -19,7 +19,7 @@ import {
 //   DropdownItem,
 //   Container
 
-export default class Nav extends React.Component {
+export default class NavComponent extends React.Component {
   constructor(props) {
     super(props);
 
