@@ -1,3 +1,10 @@
+/* NOTICE!!! */
+
+/* BE AWARE OF CASCADING!!! */
+
+/* MOST GENERAL STUFF GOES UP TOP!!! */
+
+
 body {
   margin: 0;
   padding: 0;
@@ -87,8 +94,8 @@ a.blue {
   background-size: cover;
 }
 
-/* FOR PAGE: LOGIN */
-/* FOR PAGE: LOGIN */
+/* FOR PAGE: SIGNUP */
+/* FOR PAGE: SIGNUP */
 
 #signupJumbo {
   width: 600px;
@@ -97,10 +104,55 @@ a.blue {
   padding: 0px 64px 54px 64px;
 }
 
-
 #signupTitle {
   margin: auto;
   padding-top: 40px;
   padding-bottom: 30px;
   text-align: center;
+}
+
+
+/* FOR PAGE: DETAIL */
+/* FOR PAGE: DETAIL */
+
+.micDetailIMG{
+  width: 100%;
+}
+
+.detailContainer {
+  background-color: lightpink;
+  padding: 25px;
+}
+
+
+/* FOR PAGE: HOME */
+/* FOR PAGE: HOME */
+
+#title{
+  margin:auto;
+  margin-bottom: 20px;
+}
+
+#maincol{
+  background-color: rgb(248, 248, 248);
+}
+
+
+/* FOR COMPONENT: EVENT CARD */
+/* FOR COMPONENT: EVENT CARD */
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.ECardIMG {
+  height: 150px;
+  width: 150px;
+}
+
+.ECardCard {
+  /* width: 70%; */
+  width: 600px;
+  margin: 10px;
 }
