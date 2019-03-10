@@ -10,7 +10,7 @@ import {
   Col,
   Row
 } from "reactstrap";
-import "./EventCard.css";
+//import "./EventCard.css";
 
 // CardImg,
 // CardDeck,

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 //import { Link } from "react-router-dom";
 import EventCard from "../../components/EventCard";
 import classnames from "classnames";
-import "./Home.css";
+//import "./Home.css";
 import API from "../../utils/API";
 import {
   Container,

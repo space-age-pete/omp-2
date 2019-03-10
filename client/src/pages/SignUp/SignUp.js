@@ -14,7 +14,6 @@ import {
   FormFeedback
 } from "reactstrap";
 //import "../SignUp/SignUp.css";
-import "./SignUp.css";
 
 export default class SignUp extends Component {
   state = {
