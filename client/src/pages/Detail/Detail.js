@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import { Container, Row, Col, Button, Jumbotron, Alert } from "reactstrap";
-//import "./Detail.css";
+import Rating from "react-rating";
 
 class Detail extends Component {
   state = {
@@ -47,6 +47,7 @@ class Detail extends Component {
     }
   };
 
+  //NOT CURRENTLY BEING USED
   updateMic = event => {
     event.preventDefault();
     // what I've found out is this:
@@ -60,8 +61,8 @@ class Detail extends Component {
       .catch(err => console.log(err));
   };
 
-  alertToggle = () => {
-    this.setState({ alertVisible: !this.state.alertVisible });
+  addRating = rating => {
+    console.log("rating value: ", rating);
   };
 
   addToFavorites = event => {
@@ -78,6 +79,11 @@ class Detail extends Component {
       .catch(err => console.log(err));
   };
 
+  //Probably get rid of this business
+  alertToggle = () => {
+    this.setState({ alertVisible: !this.state.alertVisible });
+  };
+
   imageTester = um => {
     if (this.state.mic.img)
       return (
@@ -88,10 +94,6 @@ class Detail extends Component {
         />
       );
   };
-
-  // addToFavorites = () => {
-
-  // }
 
   render() {
     return (
@@ -108,11 +110,12 @@ class Detail extends Component {
               </h3>
               <h5>{this.state.mic.address}</h5>
               <br />
-              <br />
               <h4>List at {this.state.mic.signUpTime}</h4>
               <h4>Show at {this.state.mic.startTime}</h4>
+              <br />
               {/* <Button onClick={this.updateMic}>Add a Snack</Button> */}
-
+              <Rating initialRating={2.5} onClick={this.addRating} />
+              <br />
               {this.props.userID && (
                 <Button onClick={this.addToFavorites}>
                   Add to My Favorites
@@ -121,6 +124,7 @@ class Detail extends Component {
             </Col>
           </Row>
           <br />
+
           {this.props.userID === this.state.mic.userID && (
             <div>
               <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>–––
