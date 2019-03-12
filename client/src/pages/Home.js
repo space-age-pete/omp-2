@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
-import EventCard from "../../components/EventCard";
+import EventCard from "../components/EventCard";
 import classnames from "classnames";
 //import "./Home.css";
-import API from "../../utils/API";
+import API from "../utils/API";
 import {
   Container,
   Row,
@@ -15,7 +15,7 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
-import MapSolo from "../../components/MapSolo";
+import MapSolo from "../components/MapSolo";
 
 // Form,
 //   FormGroup,

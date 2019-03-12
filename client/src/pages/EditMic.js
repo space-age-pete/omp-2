@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import API from "../../utils/API";
-import MicForm from "../../components/MicForm";
+import API from "../utils/API";
+import MicForm from "../components/MicForm";
 
 export default class EditMic extends Component {
   state = {

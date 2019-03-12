@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import API from "../../utils/API";
+import API from "../utils/API";
 import { Container, Row, Col, Button, Jumbotron, Alert } from "reactstrap";
 import Rating from "react-rating";
 
