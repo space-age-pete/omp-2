@@ -8,7 +8,7 @@ import SignUp from "./pages/SignUp.js";
 import Login from "./pages/Login.js";
 import MapSolo from "./components/MapSolo";
 //import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
+import Nav from "./components/Nav.js";
 import API from "../src/utils/API";
 import "./App.css";
 

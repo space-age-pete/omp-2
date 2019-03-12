@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 //import { Link } from "react-router-dom";
-import EventCard from "../components/EventCard";
+import EventCard from "../components/EventCard.js";
 import classnames from "classnames";
-//import "./Home.css";
 import API from "../utils/API";
 import {
   Container,
