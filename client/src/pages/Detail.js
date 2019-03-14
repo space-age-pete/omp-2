@@ -99,6 +99,7 @@ class Detail extends Component {
     return (
       //<Container className="detailContainer">
       <Container>
+        <h1>{this.props.location.state}</h1>
         <Jumbotron>
           <Row>
             <Col sm={this.state.mic.img ? 4 : 0}>{this.imageTester()}</Col>
@@ -114,7 +115,13 @@ class Detail extends Component {
               <h4>Show at {this.state.mic.startTime}</h4>
               <br />
               {/* <Button onClick={this.updateMic}>Add a Snack</Button> */}
-              <Rating initialRating={2.5} onClick={this.addRating} />
+
+              <Rating
+                initialRating={2.5}
+                onClick={this.addRating}
+                readonly={!this.props.userID}
+              />
+
               <br />
               {this.props.userID && (
                 <Button onClick={this.addToFavorites}>
