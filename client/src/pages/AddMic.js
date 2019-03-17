@@ -131,8 +131,9 @@ export default class AddMic extends Component {
     } else {
       return (
         <Container>
-          <Jumbotron className="formJumbo">
+          <Jumbotron id="addMicJumbo">
             {/* {this.props.loggedIn && <div>we logged in</div>} */}
+            <h3 id="addMicTitle">Add an Open Mic Night Event</h3>
             <Form>
               <FormGroup>
                 <Label for="micName">

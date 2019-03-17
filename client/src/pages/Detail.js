@@ -81,7 +81,9 @@ class Detail extends Component {
 
   //Probably get rid of this business
   alertToggle = () => {
-    this.setState({ alertVisible: !this.state.alertVisible });
+    this.setState({ alertVisible: true }, () =>
+      setTimeout(() => this.setState({ alertVisible: false }), 3000)
+    );
   };
 
   imageTester = um => {
@@ -142,10 +144,10 @@ class Detail extends Component {
               </Button>
             </div>
           )}
-          <Alert color="success" isOpen={this.state.alertVisible}>
-            This is a success alert — check it out!
-          </Alert>
         </Jumbotron>
+        <Alert color="success" isOpen={this.state.alertVisible}>
+          Added to Favorites
+        </Alert>
       </Container>
     );
   }

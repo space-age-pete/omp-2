@@ -139,9 +139,9 @@ class App extends Component {
               render={() => <Login updateUser={this.updateUser} />}
             />
           </Switch>
-          <button onClick={() => console.log(this.state)}>
+          {/* <button onClick={() => console.log(this.state)}>
             click for state
-          </button>
+          </button> */}
         </div>
       </Router>
     );

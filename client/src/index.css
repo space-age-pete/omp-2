@@ -111,6 +111,21 @@ a.blue {
   text-align: center;
 }
 
+/* FOR PAGE: ADDMIC */
+/* FOR PAGE: ADDMIC */
+
+#addMicJumbo {
+  width: 700px;
+  margin: auto;
+  padding: 0px 64px 54px 64px;
+}
+
+#addMicTitle {
+  margin: auto;
+  padding-top: 60px;
+  padding-bottom: 50px;
+  text-align: center;
+}
 
 /* FOR PAGE: DETAIL */
 /* FOR PAGE: DETAIL */
