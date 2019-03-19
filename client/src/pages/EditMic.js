@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
+import Converters from "../utils/Converters";
 import MicForm from "../components/MicForm";
 
 export default class EditMic extends Component {
@@ -34,49 +35,12 @@ export default class EditMic extends Component {
         let { comments, date, userID, __v, _id, ...rest } = res.data;
         //console.log("rest: ", rest);
         rest.mic = res.data;
-        rest.signUpTime = this.timeUnConvert(rest.signUpTime);
-        rest.startTime = this.timeUnConvert(rest.startTime);
+        rest.signUpTime = Converters.timeUnConvert(rest.signUpTime);
+        rest.startTime = Converters.timeUnConvert(rest.startTime);
         this.setState(rest, () => console.log("state", this.state));
         //console.log(res.data);
       })
       .catch(err => console.log(err));
-  };
-
-  dayConvert = arg => {
-    let week = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    if (typeof arg === Number) return week[arg];
-    else if (typeof arg === String) return week.indexOf(arg);
-  };
-
-  timeConvert = arg => {
-    let firstBit = +arg.substring(0, 2);
-    let secondBit = arg.substring(2);
-    if (firstBit > 12) return `${firstBit - 12}${secondBit} PM`;
-    else if (firstBit === 0) return `12${secondBit} AM`;
-    else if (firstBit === 12) return `${arg} PM`;
-    else return `${arg} AM`;
-  };
-
-  timeUnConvert = arg => {
-    let c = arg.indexOf(":");
-    let firstBit = +arg.substring(0, c);
-    let secondBit = arg.substring(c, c + 3);
-    let thirdBit = arg.substring(c + 4);
-    //console.log(firstBit, secondBit, thirdBit);
-    //if (firstBit === 12 && thirdBit === "PM") return `${firstBit + 12}${secondBit}`;
-    if (thirdBit === "PM" && firstBit < 12)
-      return `${firstBit + 12}${secondBit}`;
-    else if (thirdBit === "AM" && firstBit === 12) return `00${secondBit}`;
-    else if (firstBit < 10) return `0${firstBit}${secondBit}`;
-    else return `${firstBit}${secondBit}`;
   };
 
   handleInputChange = event => {
@@ -103,8 +67,8 @@ export default class EditMic extends Component {
         micName: this.state.micName,
         locationName: this.state.locationName,
         address: this.state.address,
-        signUpTime: this.timeConvert(this.state.signUpTime),
-        startTime: this.timeConvert(this.state.startTime),
+        signUpTime: Converters.timeConvert(this.state.signUpTime),
+        startTime: Converters.timeConvert(this.state.startTime),
         day: this.state.day,
         host: this.state.host,
         slotLength: this.state.slotLength,

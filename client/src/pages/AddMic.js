@@ -1,19 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
+import Converters from "../utils/Converters";
 import MicForm from "../components/MicForm";
-import {
-  Col,
-  Button,
-  Form,
-  FormGroup,
-  FormText,
-  Label,
-  Input,
-  Row,
-  Container,
-  Jumbotron
-} from "reactstrap";
 
 export default class AddMic extends Component {
   state = {
@@ -32,29 +21,6 @@ export default class AddMic extends Component {
     redirectTo: null
   };
 
-  dayConvert = arg => {
-    let week = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday"
-    ];
-    if (typeof arg === Number) return week[arg];
-    else if (typeof arg === String) return week.indexOf(arg);
-  };
-
-  timeConvert = arg => {
-    let firstBit = +arg.substring(0, 2);
-    let secondBit = arg.substring(2);
-    if (firstBit > 12) return `${firstBit - 12}${secondBit} PM`;
-    else if (firstBit === 0) return `12${secondBit} AM`;
-    else if (firstBit === 12) return `${arg} PM`;
-    else return `${arg} AM`;
-  };
-
   componentDidMount() {
     console.log("CDM props:", this.props);
     //setInterval(() => console.log("CDM props:", this.props), 50);
@@ -66,7 +32,6 @@ export default class AddMic extends Component {
     this.setState({
       [name]: value
     });
-    console.log("signup time", this.timeConvert(this.state.signUpTime));
   };
 
   fileSelectedHandler = event => {
@@ -90,8 +55,8 @@ export default class AddMic extends Component {
       fd.append("micName", this.state.micName);
       fd.append("locationName", this.state.locationName);
       fd.append("address", this.state.address);
-      fd.append("signUpTime", this.timeConvert(this.state.signUpTime));
-      fd.append("startTime", this.timeConvert(this.state.startTime));
+      fd.append("signUpTime", Converters.timeConvert(this.state.signUpTime));
+      fd.append("startTime", Converters.timeConvert(this.state.startTime));
       fd.append("day", this.state.day);
       fd.append("slotLength", this.state.slotLength);
       fd.append("host", this.state.host);
