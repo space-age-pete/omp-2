@@ -134,6 +134,7 @@ export default class EditMic extends Component {
             micInfo={this.state}
             handleInputChange={this.handleInputChange}
             handleFormSubmit={this.handleFormSubmit}
+            fileSelectedHandler={this.fileSelectedHandler}
             testWord="cowboy"
           />
           {/* <button onClick={() => console.log(this.state)}>state</button> */}
