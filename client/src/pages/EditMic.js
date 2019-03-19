@@ -136,7 +136,7 @@ export default class EditMic extends Component {
             handleFormSubmit={this.handleFormSubmit}
             testWord="cowboy"
           />
-          <button onClick={() => console.log(this.state)}>state</button>
+          {/* <button onClick={() => console.log(this.state)}>state</button> */}
         </div>
       );
     }

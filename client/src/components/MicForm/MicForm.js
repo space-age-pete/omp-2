@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 import {
   Col,
   Button,
@@ -15,21 +14,7 @@ import {
 import MicFormInput from "./MicFormInput";
 
 export default class MicForm extends React.Component {
-  state = {
-    micName: "",
-    locationName: "",
-    address: "",
-    signUpTime: "",
-    startTime: "",
-    day: "",
-    website: "",
-    slotLength: "",
-    host: "",
-    additionalInfo: "",
-    micImage: null,
-    loggedIn: false,
-    redirectTo: null
-  };
+  state = {};
 
   render() {
     return (
@@ -134,7 +119,7 @@ export default class MicForm extends React.Component {
               <Label for="micImage">Image</Label>
 
               <Input
-                onChange={this.fileSelectedHandler}
+                onChange={this.props.fileSelectedHandler}
                 type="file"
                 name="micImage"
                 id="micImage"
