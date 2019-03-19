@@ -119,7 +119,7 @@ class Detail extends Component {
               {/* <Button onClick={this.updateMic}>Add a Snack</Button> */}
 
               <Rating
-                initialRating={2.5}
+                initialRating={4.33}
                 onClick={this.addRating}
                 readonly={!this.props.userID}
               />

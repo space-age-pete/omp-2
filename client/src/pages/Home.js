@@ -69,6 +69,8 @@ class Home extends Component {
         <Row>
           <Col id="maincol" xs="3">
             <Jumbotron>
+              <h4>VIEW BY DAY</h4>
+              <br />
               <h5 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h5>
               <h5 onClick={() => this.loadMics("day", "Monday")}>Monday</h5>
               <h5 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h5>
@@ -142,7 +144,7 @@ class Home extends Component {
                       ))}
                     </div>
                   ) : (
-                    <h5>nothin' doin'</h5>
+                    <h5>No Results</h5>
                   )}
                 </Jumbotron>
               </TabPane>
