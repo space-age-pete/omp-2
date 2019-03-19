@@ -4,7 +4,9 @@ import "./MapSolo.css";
 //import API from "../../utils/API";
 import MDSpinner from "react-md-spinner";
 import fighters from "../../utils/fighters.json";
-import keys from "../../keys";
+
+//WONT WORK LOCALLY JUST TRYING TO GET BY
+//import keys from process.env.MAP_KEY || "../../keys";
 import API from "../../utils/API";
 //import EventCard from "../EventCard";
 import { Link } from "react-router-dom";
@@ -351,8 +353,11 @@ class MapSolo extends Component {
     ) {
       this.loadScript(
         `https://maps.googleapis.com/maps/api/js?key=${
-          keys.googleMaps.key
+          process.env.MAP_KEY
         }&callback=initMap`
+
+        // lord have mercy on my soul
+        // || keys.googleMaps.key
       );
     }
   };
