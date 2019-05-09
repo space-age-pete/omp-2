@@ -352,12 +352,15 @@ class MapSolo extends Component {
       (this.state.micsAPIHit || this.state.mics.length)
     ) {
       this.loadScript(
-        `https://maps.googleapis.com/maps/api/js?key=${
-          process.env.MAP_KEY
-        }&callback=initMap`
+        // `https://maps.googleapis.com/maps/api/js?key=${
+        //   process.env.MAP_KEY
+        // }&callback=initMap`
+
+        `https://maps.googleapis.com/maps/api/js?key=AIzaSyC2WljOFv9ujHKJWIgMsrE4Wj3bZA5nBZk&callback=initMap`
 
         // lord have mercy on my soul
         // || keys.googleMaps.key
+        //
       );
     }
   };
