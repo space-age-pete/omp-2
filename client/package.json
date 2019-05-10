@@ -12,6 +12,7 @@
     "react-scripts": "2.1.1",
     "reactstrap": "^6.5.0"
   },
+  "proxy": "http://localhost:3001",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
