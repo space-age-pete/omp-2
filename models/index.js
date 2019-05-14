@@ -1,5 +1,5 @@
 module.exports = {
   Mic: require("./mic"),
-  User: require("./User"),
+  User: require("./user"),
   Comment: require("./comment")
 };
