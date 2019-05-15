@@ -108,7 +108,7 @@ class Detail extends Component {
             {this.imageTester()}
             <Jumbotron className="detailJumbo">
               <Rating
-                initialRating={4.33}
+                initialRating={4.5}
                 onClick={this.addRating}
                 readonly={!this.props.userID}
               />
@@ -126,11 +126,10 @@ class Detail extends Component {
                     Delete This Mic
                   </Button>
                   <br />
-                  <Button className="detailButton">
-                    <Link to={"/editmic/" + this.props.match.params.id}>
-                      Edit This Mic
-                    </Link>
-                  </Button>
+
+                  <Link to={"/editmic/" + this.props.match.params.id}>
+                    <Button className="detailButton">Edit This Mic</Button>
+                  </Link>
                 </div>
               )}
             </Jumbotron>
