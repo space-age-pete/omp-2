@@ -102,22 +102,11 @@ class Detail extends Component {
       //<Container className="detailContainer">
       <Container>
         <h1>{this.props.location.state}</h1>
-        <Jumbotron>
-          <Row>
-            <Col sm={this.state.mic.img ? 4 : 0}>{this.imageTester()}</Col>
-            <Col sm={this.state.mic.img ? 8 : 12}>
-              <h1>{this.state.mic.micName}</h1>
-              <br />
-              <h3>
-                {this.state.mic.day}s at {this.state.mic.locationName}
-              </h3>
-              <h5>{this.state.mic.address}</h5>
-              <br />
-              <h4>List at {this.state.mic.signUpTime}</h4>
-              <h4>Show at {this.state.mic.startTime}</h4>
-              <br />
-              {/* <Button onClick={this.updateMic}>Add a Snack</Button> */}
-
+        <Row>
+          <Col sm={4}>
+            {/* <Jumbotron className="detailJumbo">{this.imageTester()}</Jumbotron> */}
+            {this.imageTester()}
+            <Jumbotron className="detailJumbo">
               <Rating
                 initialRating={4.33}
                 onClick={this.addRating}
@@ -126,25 +115,49 @@ class Detail extends Component {
 
               <br />
               {this.props.userID && (
-                <Button onClick={this.addToFavorites}>
+                <Button className="detailButton" onClick={this.addToFavorites}>
                   Add to My Favorites
                 </Button>
               )}
-            </Col>
-          </Row>
-          <br />
-
-          {this.props.userID === this.state.mic.userID && (
-            <div>
-              <Button onClick={this.deleteThis}>DELETE THIS MIC</Button>–––
-              <Button>
-                <Link to={"/editmic/" + this.props.match.params.id}>
-                  EDIT THIS MIC
-                </Link>
-              </Button>
-            </div>
-          )}
-        </Jumbotron>
+              <br />
+              {this.props.userID === this.state.mic.userID && (
+                <div>
+                  <Button className="detailButton" onClick={this.deleteThis}>
+                    Delete This Mic
+                  </Button>
+                  <br />
+                  <Button className="detailButton">
+                    <Link to={"/editmic/" + this.props.match.params.id}>
+                      Edit This Mic
+                    </Link>
+                  </Button>
+                </div>
+              )}
+            </Jumbotron>
+          </Col>
+          <Col sm={8}>
+            <Jumbotron className="detailThickJumbo">
+              <Row>
+                <Col sm={12}>
+                  <h1>
+                    <b>{this.state.mic.micName}</b>
+                  </h1>
+                  <br />
+                  <h3>
+                    {this.state.mic.day}s at {this.state.mic.locationName}
+                  </h3>
+                  <h5>{this.state.mic.address}</h5>
+                  <br />
+                  <h4>List at {this.state.mic.signUpTime}</h4>
+                  <h4>Show at {this.state.mic.startTime}</h4>
+                  <br />
+                  {/* <Button onClick={this.updateMic}>Add a Snack</Button> */}
+                </Col>
+              </Row>
+              <br />
+            </Jumbotron>
+          </Col>
+        </Row>
         <Alert color="success" isOpen={this.state.alertVisible}>
           Added to Favorites
         </Alert>

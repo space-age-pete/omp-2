@@ -139,6 +139,30 @@ a.blue {
   padding: 25px;
 }
 
+.detailJumbo {
+  /* margin: auto; */
+  /* background-color: red; */
+  padding: 32px;
+  margin-top: 32px;
+}
+
+.detailThickJumbo {
+  /* margin: auto; */
+  /* background-color: red; */
+  padding: 64px;
+}
+
+.detailButton {
+  background-color: rgb(156, 118, 206);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+@media (hover: hover) {
+  .detailButton:hover {
+    background-color: rgb(194, 171, 224);
+  }
+}
 
 /* FOR PAGE: HOME */
 /* FOR PAGE: HOME */
