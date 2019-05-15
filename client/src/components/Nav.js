@@ -39,7 +39,7 @@ export default class NavComponent extends React.Component {
       <div>
         <Navbar dark expand="md">
           <Container>
-            <NavbarBrand href="/">Open Mic Project</NavbarBrand>
+            <NavbarBrand href="/">MicCheck</NavbarBrand>
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <InputGroup>

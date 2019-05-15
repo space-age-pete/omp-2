@@ -48,7 +48,7 @@ class Home extends Component {
     API.getMics({ params: theParams })
       .then(res => {
         console.log(res.data);
-        this.setState({ mics: res.data });
+        this.setState({ mics: res.data, day: value });
       })
       .catch(err => console.log(err));
 
@@ -66,22 +66,67 @@ class Home extends Component {
   render() {
     return (
       <Container>
+        {/* <Row>
+          <Col className="banner">
+            <Jumbotron className="mainJumbo">
+              <h1>{this.state.day} Mics</h1>
+            </Jumbotron>
+          </Col>
+        </Row> */}
         <Row>
           <Col id="maincol" xs="3">
-            <Jumbotron>
+            <Jumbotron className="mainJumbo">
               <h4>VIEW BY DAY</h4>
               <br />
-              <h5 onClick={() => this.loadMics("day", "Sunday")}>Sunday</h5>
-              <h5 onClick={() => this.loadMics("day", "Monday")}>Monday</h5>
-              <h5 onClick={() => this.loadMics("day", "Tuesday")}>Tuesday</h5>
-              <h5 onClick={() => this.loadMics("day", "Wednesday")}>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Sunday")}
+              >
+                Sunday
+              </h5>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Monday")}
+              >
+                Monday
+              </h5>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Tuesday")}
+              >
+                Tuesday
+              </h5>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Wednesday")}
+              >
                 Wednesday
               </h5>
-              <h5 onClick={() => this.loadMics("day", "Thursday")}>Thursday</h5>
-              <h5 onClick={() => this.loadMics("day", "Friday")}>Friday</h5>
-              <h5 onClick={() => this.loadMics("day", "Saturday")}>Saturday</h5>
-              <h5 onClick={() => this.loadMics("", "")}>All Mics</h5>
-              <h5 onClick={() => this.loadMics("userID", this.props.userID)}>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Thursday")}
+              >
+                Thursday
+              </h5>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Friday")}
+              >
+                Friday
+              </h5>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("day", "Saturday")}
+              >
+                Saturday
+              </h5>
+              <h5 className="daySelector" onClick={() => this.loadMics("", "")}>
+                All Mics
+              </h5>
+              <h5
+                className="daySelector"
+                onClick={() => this.loadMics("userID", this.props.userID)}
+              >
                 My Mics
               </h5>
             </Jumbotron>
@@ -105,6 +150,14 @@ class Home extends Component {
                 <h5>nothin' doin'</h5>
               )}
             </Jumbotron> */}
+            {/* <Row>
+              <Col className="banner" sm={8}>
+                <Jumbotron className="mainJumbo">
+                  <h1>{this.state.day} Mics</h1>
+                </Jumbotron>
+              </Col>
+            </Row> */}
+
             <Nav tabs>
               <NavItem>
                 <NavLink
@@ -133,10 +186,10 @@ class Home extends Component {
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <Jumbotron>
+                <Jumbotron className="mainJumbo">
                   {/* <Row>
-                    <h3 id="title"> Welcome to OMP </h3>
-                  </Row> */}
+                      <h3 id="title"> Welcome to OMP </h3>
+                    </Row> */}
                   {this.state.mics.length ? (
                     <div>
                       {this.state.mics.map(mic => (
@@ -149,7 +202,7 @@ class Home extends Component {
                 </Jumbotron>
               </TabPane>
               <TabPane tabId="2">
-                <Jumbotron>
+                <Jumbotron className="mainJumbo">
                   <MapSolo mics={this.state.mics} />
                   {/* <MapSolo /> */}
                 </Jumbotron>

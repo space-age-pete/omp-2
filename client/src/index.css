@@ -34,6 +34,13 @@ a {
   color: white;
 }
 
+@media (hover: hover) {
+  a:hover {
+    text-decoration:none;
+    color: white;
+  }
+}
+
 a.blue {
   color: blue
 }
@@ -164,8 +171,14 @@ a.blue {
   }
 }
 
+
 /* FOR PAGE: HOME */
 /* FOR PAGE: HOME */
+
+.banner {
+  text-align: center;
+  font-size: 711px;
+}
 
 #title{
   margin:auto;
@@ -173,7 +186,24 @@ a.blue {
 }
 
 #maincol{
-  background-color: rgb(248, 248, 248);
+  /* background-color: rgb(248, 248, 248); */
+}
+
+.mainJumbo {
+  /* margin: auto; */
+  /* background-color: red; */
+  padding: 32px;
+}
+
+.daySelector {
+  padding:10px;
+}
+
+@media (hover: hover) {
+  .daySelector:hover {
+    background-color: rgb(194, 171, 224);
+    cursor: pointer;
+  }
 }
 
 

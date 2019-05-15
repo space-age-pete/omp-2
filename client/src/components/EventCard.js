@@ -49,7 +49,7 @@ export default class EventCard extends React.Component {
                   <br />
                   Show at {this.state.mic.startTime}
                 </CardText>
-                <Button>
+                <Button className="detailButton">
                   <Link to={"/mics/" + this.state.mic._id}>More Info</Link>
                 </Button>
               </Col>
